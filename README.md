@@ -1,6 +1,6 @@
-# TODO - Your title
+# An Architecture for YANG-Push to Message Broker Integration
 
-This is the working area for the IETF [NMOP Working Group](https://datatracker.ietf.org/wg/nmop/documents/) Internet-Draft, "TODO - Your title".
+This is the working area for the IETF [NMOP Working Group](https://datatracker.ietf.org/wg/nmop/documents/) Internet-Draft, "An Architecture for YANG-Push to Message Broker Integration".
 
 * [Editor's Copy](https://ietf-wg-nmop.github.io/draft-ietf-nmop-yang-message-broker-integration/#go.draft-ietf-nmop-yang-message-broker-integration.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-nmop-yang-message-broker-integration)
