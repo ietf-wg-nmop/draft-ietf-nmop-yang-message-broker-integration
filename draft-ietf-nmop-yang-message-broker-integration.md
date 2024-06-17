@@ -394,61 +394,7 @@ informative:
 
 
 ~~~~
- ========== NOTE: '\' line wrapping per RFC 8792) ===========
-
- <rpc message-id="101"
-   xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <edit-config>
-     <target>
-       <running/>
-     </target>
-     <config>
-       <subscriptions xmlns="urn:ietf:params:xml:ns:yang:ietf\
-       -subscribed-notifications">
-         <subscription>
-           <id>6666</id>
-           <datastore xmlns="urn:ietf:params:xml:ns:yang:ietf\
-           -yang-push"
-             xmlns:ds="urn:ietf:params:xml:ns:yang:ietf\
-             -datastores">ds:operational</datastore>
-           <datastore-xpath-filter xmlns="urn:ietf:params:xml:ns\
-           :yang:ietf-yang-push"
-             xmlns:if="urn:ietf:params:xml:ns:yang:ietf-inter\
-             faces">/if:interfaces</datastore-xpath-filter>
-           <revision xmlns="urn:ietf:params:xml:ns:yang:ietf-yang\
-           -push-revision">2018-02-20</revision>
-           <transport xmlns:unt="urn:ietf:params:xml:ns:yang:ietf\
-           -udp-notif-transport">unt:udp-notif</transport>
-           <encoding>encode-json</encoding>
-           <receivers>
-             <receiver>
-               <name>subscription-specific-receiver-def</name>
-               <receiver-instance-ref xmlns="urn:ietf:params:xml\
-               :ns:yang:ietf-subscribed-notif-receivers">\
-               global-udp-notif-receiver-def</receiver-instance-ref>
-             </receiver>
-           </receivers>
-           <periodic xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-             <period>6000</period>
-           </periodic>
-         </subscription>
-         <receiver-instances xmlns="urn:ietf:params:xml:ns:yang:ietf\
-         -subscribed-notif-receivers">
-           <receiver-instance>
-             <name>global-udp-notif-receiver-def</name>
-             <udp-notif-receiver xmlns="urn:ietf:params:xml:ns:yang\
-             :ietf-udp-notif-transport">
-               <address>192.0.5.1</address>
-               <port>12345</port>
-               <enable-segmentation>false</enable-segmentation>
-               <max-segment-size/>
-             </udp-notif-receiver>
-           </receiver-instance>
-         </receiver-instances>
-       </subscriptions>
-     </config>
-   </edit-config>
- </rpc>
+{::include-fold ./figures/example-establish-configured-subscription.xml}
 ~~~~
 {: #Figure-2 title="NETCONF Example to establish configured subscription"}
 
@@ -521,34 +467,7 @@ informative:
    same subscription.
 
 ~~~~
- ========== NOTE: '\' line wrapping per RFC 8792) ===========
-
-   {
-     "ietf-notification:notification": {
-       "eventTime": "2023-03-25T08:30:11.22Z",
-       "ietf-notification-sequencing:sysName": "example-router",
-       "ietf-notification-sequencing:sequenceNumber": 1,
-       "ietf-yang-push:push-update": {
-         "id": 6666,
-         "ietf-yang-push-observation-timestamp:observation-time": \
-         "2023-03-25T08:30:11.22Z",
-         "ietf-yang-push-observation-timestamp:point-in-time": \
-         "state-changed",
-         "datastore-contents": {
-           "ietf-interfaces:interfaces": [
-             {
-               "interface": {
-                 "name": "eth0",
-                 "type": "iana-if-type:ethernetCsmacd",
-                 "oper-status": "up",
-                 "mtu": 1500
-               }
-             }
-           ]
-         }
-       }
-     }
-   }
+{::include-fold ./figures/push-example-push-update.xml}
 ~~~~
 {: #Figure-4 title="JSON YANG-Push Example for a push-update notification message"}
 
@@ -561,44 +480,7 @@ informative:
    same subscription.
 
 ~~~~
- ========== NOTE: '\' line wrapping per RFC 8792) ===========
-
-   {
-     "ietf-notification:notification": {
-       "eventTime": "2023-03-25T08:30:11.22Z",
-       "ietf-notification-sequencing:sysName": "example-router",
-       "ietf-notification-sequencing:sequenceNumber": 1,
-       "ietf-yang-push:push-change-update": {
-         "id": 2222,
-         "ietf-yang-push-observation-timestamp:observation-time": \
-         "2023-03-25T08:30:11.22Z",
-         "ietf-yang-push-observation-timestamp:point-in-time": \
-         "state-changed",
-         "datastore-contents": {
-           "yang-patch": {
-             "patch-id": "patch_54",
-             "comment": "Changing encoding to JSON and increasing \
-             the period to 10 minutes",
-             "edit": [
-               {
-                 "edit-id": "id_change_1",
-                 "operation": "merge",
-                 "target": "/ietf-subscribed-notifications\:subs\
-                 criptions/subscription[id=2222]",
-                 "value": {
-                   "ietf-subscribed-notifications:encoding": \
-                   "ietf-subscribed-notifications:encode-json",
-                   "ietf-yang-push:periodic": {
-                     "period": 60000
-                   }
-                 }
-               }
-             ]
-           }
-         }
-       }
-     }
-   }
+{::include-fold ./figures/push-change-update.xml}
 ~~~~
 {: #Figure-5 title="JSON YANG-Push Example for a push-change-update notification message"}
 
