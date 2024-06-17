@@ -35,7 +35,7 @@ author:
 
 normative:
 
-   ConDoc18:
+   Con18:
               target: https://github.com/confluentinc/schema-registry/
               title: "Confluent Schema Registry"
               author:
