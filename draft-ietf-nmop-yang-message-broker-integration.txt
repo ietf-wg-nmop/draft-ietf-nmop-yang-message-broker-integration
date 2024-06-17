@@ -716,12 +716,10 @@ Table of Contents
 
 8.1.  Normative References
 
-   [Con18]    Yokota, R. and Community and Apache Software Foundation,
-              "Confluent Schema Registry", December 2018,
+   [Con18]    Yokota, R., "Confluent Schema Registry", December 2018,
               <https://github.com/confluentinc/schema-registry/>.
 
-   [ConDoc18] Yokota, R. and Confluent Community and Apache Software
-              Foundation, "Confluent Schema Registry Documentation",
+   [ConDoc18] Yokota, R., "Confluent Schema Registry Documentation",
               December 2018,
               <https://docs.confluent.io/platform/current/schema-
               registry/>.
@@ -772,11 +770,10 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-tgraf-
               netconf-yang-push-observation-time-01>.
 
-   [Kaf11]    Narkhede, N. and Apache Software Foundation, "Apache
-              Kafka", January 2011, <https://kafka.apache.org/>.
+   [Kaf11]    Narkhede, N., "Apache Kafka", January 2011,
+              <https://kafka.apache.org/>.
 
-   [LYP23]    Lin, Z. and Apache Software Foundation, "libyangpush",
-              September 2023,
+   [LYP23]    Lin, Z., "libyangpush", September 2023,
               <https://github.com/network-analytics/libyangpush/>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -820,17 +817,16 @@ Table of Contents
               RFC 9254, DOI 10.17487/RFC9254, July 2022,
               <https://www.rfc-editor.org/rfc/rfc9254>.
 
-   [Yak24]    Feng, F. and Apache Software Foundation, "Yangkit",
-              February 2024, <https://github.com/yang-central/yangkit/>.
+   [Yak24]    Feng, F., "Yangkit", February 2024,
+              <https://github.com/yang-central/yangkit/>.
 
-   [YLA24]    Lin, Z. and Apache Software Foundation, "libyangpush",
-              March 2024, <https://github.com/Zephyre777/draft-lincla-
-              netconf-yang-library-augmentation/>.
+   [YLA24]    Lin, Z., "libyangpush", March 2024,
+              <https://github.com/Zephyre777/draft-lincla-netconf-yang-
+              library-augmentation/>.
 
-   [YSR24]    Elhassany, A. and Apache Software Foundation, "YANG Schema
-              Registry Extension", February 2024,
-              <https://github.com/confluentinc/schema-registry-yang-
-              format/>.
+   [YSR24]    Elhassany, A., "YANG Schema Registry Extension", February
+              2024, <https://github.com/confluentinc/schema-registry-
+              yang-format/>.
 
    [YSRPR24]  Elhassany, A., "YANG Schema Registry Extension Progress
               Report", February 2024, <https://github.com/network-
@@ -839,8 +835,8 @@ Table of Contents
 
 8.2.  Informative References
 
-   [Atl15]    Hortonworks and Apache Software Foundation, "Apache
-              Atlas", May 2015, <https://atlas.apache.org/>.
+   [Atl15]    Hortonworks, "Apache Atlas", May 2015,
+              <https://atlas.apache.org/>.
 
    [Deh22]    Dehghani, Z., "Data Mesh", March 2022,
               <https://www.oreilly.com/library/view/data-
@@ -1028,9 +1024,15 @@ Authors' Addresses
 
    Thomas Graf
    Swisscom
+   Binzring 17
+   CH-Zuerich 8045
+   Switzerland
    Email: thomas.graf@swisscom.com
 
 
    Ahmed Elhassany
    Swisscom
+   Binzring 17
+   CH-Zuerich 8045
+   Switzerland
    Email: ahmed.elhassany@swisscom.com
