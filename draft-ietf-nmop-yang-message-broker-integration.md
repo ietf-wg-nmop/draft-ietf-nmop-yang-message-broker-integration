@@ -35,6 +35,14 @@ author:
 
 normative:
 
+   Kaf11:
+              target: https://kafka.apache.org/
+              title: "Apache Kafka"
+              author:
+                - name: N. Narkhede
+                - org: Apache Software Foundation
+              date: January 2011
+
    Con18:
               target: https://github.com/confluentinc/schema-registry/
               title: "Confluent Schema Registry"
@@ -50,14 +58,6 @@ normative:
                 - name: R. Yokota
                 - org: Confluent Community and Apache Software Foundation
               date: December 2018
-
-   Kaf11:
-              target: https://kafka.apache.org/
-              title: "Apache Kafka"
-              author:
-                - name: N. Narkhede
-                - org: Apache Software Foundation
-              date: January 2011
 
    LYP23:
               target: https://github.com/network-analytics/libyangpush/
@@ -239,8 +239,8 @@ informative:
    With {{?RFC3535}} the IAB set the requirements for Network Management in
    2003.  From these requirements NETCONF {{?RFC6241}}, NETCONF
    Notifications {{?RFC5277}} and RESTCONF {{?RFC8040}} has been defined to
-   configure through <edit-config> and retrieve operational data through
-   <get> and NETCONF notifications through <notification> from a YANG
+   configure through `<edit-config>` and retrieve operational data through
+   `<get>` and NETCONF notifications through `<notification>` from a YANG
    datastore on a network node.
 
    With YANG-Push, as defined in {{!RFC8639}}, {{?RFC8640}} and {{!RFC8641}},
@@ -490,7 +490,7 @@ informative:
    subscription state change notification received in step number (3) in
    the workflow diagram, all the YANG module dependencies need to be
    determined through the YANG Library {{?RFC8525}}, and then through
-   NETCONF <get-schema> rpc calls according to {{!RFC6022}} all YANG
+   NETCONF `<get-schema>` rpc calls according to {{!RFC6022}} all YANG
    modules need to be retrieved as described in step (4) in the workflow
    diagram.
 
@@ -612,7 +612,7 @@ informative:
    Zhuoyao Lin developed as part of her internship a library to parse
    YANG-Push subscription notifications, identify YANG module
    dependencises with YANG Library {{?RFC8525}} and obtain with NETCONF
-   <get-schema> rpc calls {{!RFC6022}} all YANG modules from YANG-Push
+   `<get-schema>` rpc calls {{!RFC6022}} all YANG modules from YANG-Push
    publisher.
 
    The source code can be obtained here: {{LYP23}} and was validated at
@@ -667,7 +667,7 @@ This document has no IANA actions.
 
    *  All relevant YANG modules for a subscribed xpath can be determined
       through the YANG Library {{?RFC8525}} and retrieved throug NETCONF
-      <get-schema> rpc calls according to {{!RFC6022}}.  Gap in YANG
+      `<get-schema>` rpc calls according to {{!RFC6022}}.  Gap in YANG
       library addressed in
       {{!I-D.lincla-netconf-yang-library-augmentation}}.
 
