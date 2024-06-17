@@ -403,7 +403,7 @@ informative:
    based {{?I-D.ietf-netconf-https-notif}} or UDP-based
    {{?I-D.ietf-netconf-udp-notif}} transport with
    {{!I-D.tgraf-netconf-notif-sequencing}},
-   {{I-D.tgraf-netconf-yang-push-observation-time}} and
+   {{!I-D.tgraf-netconf-yang-push-observation-time}} and
    {{!I-D.ietf-netconf-yang-notifications-versioning}} as extensions for
    the same subscription.
 
@@ -452,18 +452,18 @@ informative:
    recognize loss from the YANG-Push publisher in step (2) down to the
    Time Series Database Ingestion in step (12).
 
-   {{I-D.tgraf-netconf-yang-push-observation-time}} adds observation-time
+   {{!I-D.tgraf-netconf-yang-push-observation-time}} adds observation-time
    and point-in-time in the YANG-Push push-update or push-change-update
    message. observation-time contains the timestamp and point-in-time
    when the metrics where observed.  See Section 3 of
-   {{I-D.tgraf-netconf-yang-push-observation-time}} for more details.
+   {{!I-D.tgraf-netconf-yang-push-observation-time}} for more details.
 
    Figure 4 provides an example of a JSON encoded, {{!RFC7951}}, push-
    update notification message over HTTPS-based
    {{?I-D.ietf-netconf-https-notif}} or UDP-based
    {{?I-D.ietf-netconf-udp-notif}} transport with
    {{!I-D.tgraf-netconf-notif-sequencing}} and
-   {{I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
+   {{!I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
    same subscription.
 
 ~~~~
@@ -476,7 +476,7 @@ informative:
    {{?I-D.ietf-netconf-https-notif}} or UDP-based
    {{?I-D.ietf-netconf-udp-notif}} transport with
    {{!I-D.tgraf-netconf-notif-sequencing}} and
-   {{I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
+   {{!I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
    same subscription.
 
 ~~~~
@@ -572,7 +572,7 @@ informative:
    The YANG data is being ingested in step (12)according to the
    previously defined ingestion specification and indexed with the
    timestamp defined in observation-time as defined in
-   {{I-D.tgraf-netconf-yang-push-observation-time}}.  A network operator
+   {{!I-D.tgraf-netconf-yang-push-observation-time}}.  A network operator
    is now able to query the previously subscribed YANG data.
 
 # Implementation Status
@@ -656,7 +656,7 @@ This document has no IANA actions.
    *  {{!I-D.tgraf-netconf-notif-sequencing}} extends NETCONF notification
       header with sysName, messagePublisherId and sequenceNumber.
 
-   *  {{I-D.tgraf-netconf-yang-push-observation-time}} extends YANG-Push
+   *  {{!I-D.tgraf-netconf-yang-push-observation-time}} extends YANG-Push
       push-update or push-change-update message with observation-time or
       state-changed-observation-time.
 
@@ -685,7 +685,7 @@ This document has no IANA actions.
       {{!I-D.aelhassany-anydata-validation}} implementation validated at
       hackathon.
 
-   *  {{I-D.tgraf-netconf-yang-push-observation-time}} merges both
+   *  {{!I-D.tgraf-netconf-yang-push-observation-time}} merges both
       timestamps for periodical and on-change YANG-Push subscriptions
       into one observation-time timestamp and adding a decleration
       point-in-time to describe when the observation was obesreved.
