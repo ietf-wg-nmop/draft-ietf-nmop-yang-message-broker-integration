@@ -27,10 +27,16 @@ author:
  -
     fullname: "Thomas Graf"
     organization: Swisscom
+    street: Binzring 17
+    code: CH-Zuerich 8045
+    country: Switzerland
     email: "thomas.graf@swisscom.com"
  -
     fullname: "Ahmed Elhassany"
     organization: Swisscom
+    street: Binzring 17
+    code: CH-Zuerich 8045
+    country: Switzerland
     email: "ahmed.elhassany@swisscom.com"
 
 normative:
@@ -40,7 +46,6 @@ normative:
               title: "Apache Kafka"
               author:
                 - name: N. Narkhede
-                - org: Apache Software Foundation
               date: January 2011
 
    Con18:
@@ -48,7 +53,6 @@ normative:
               title: "Confluent Schema Registry"
               author:
                 - name: R. Yokota
-                - org: Community and Apache Software Foundation
               date: December 2018
 
    ConDoc18:
@@ -56,7 +60,6 @@ normative:
               title: "Confluent Schema Registry Documentation"
               author:
                 - name: R. Yokota
-                - org: Confluent Community and Apache Software Foundation
               date: December 2018
 
    LYP23:
@@ -64,7 +67,6 @@ normative:
               title: "libyangpush"
               author:
                 - name: Z. Lin
-                - org: Apache Software Foundation
               date: September 2023
 
    Yak24:
@@ -72,7 +74,6 @@ normative:
               title: "Yangkit"
               author:
                 - name: F. Feng
-                - org: Apache Software Foundation
               date: February 2024
 
    YLA24:
@@ -80,7 +81,6 @@ normative:
               title: "libyangpush"
               author:
                 - name: Z. Lin
-                - org: Apache Software Foundation
               date: March 2024
 
    YSR24:
@@ -88,7 +88,6 @@ normative:
               title: "YANG Schema Registry Extension"
               author:
                 - name: Ahmed Elhassany
-                - org: Apache Software Foundation
               date: February 2024
 
    YSRPR24:
@@ -105,7 +104,6 @@ informative:
               title: "Apache Atlas"
               author:
                 - name: Hortonworks
-                - org: Apache Software Foundation
               date: May 2015
 
    Deh22:
