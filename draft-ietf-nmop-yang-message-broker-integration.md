@@ -697,8 +697,9 @@ This document has no IANA actions.
 
    Note to the RFC-Editor: Please remove this section before publishing.
 
+   {: vspace="0"}
    Open Point 1:
-      Figure 9 in Section 4.1 and YANG module in Section 5 of {{!RFC8641}}
+   : Figure 9 in Section 4.1 and YANG module in Section 5 of {{!RFC8641}}
       defines the payload of YANG-push notifications where "datastore-
       contents" or the "value" of a "push-change-update") is "anydata".
       {{!RFC7950}} Section 7.10 states that anydata represents an unknown
@@ -714,7 +715,7 @@ This document has no IANA actions.
       nodes contained in anydata.
 
    Open Point 2:
-      The NETCONF Notification structure is defined in {{?RFC5277}} using a
+   : The NETCONF Notification structure is defined in {{?RFC5277}} using a
       XSD Schema.  For YANG-push {{!RFC8641}}, this XSD Schema has been
       proposed using YANG 1.1 {{!RFC7950}} modeling language in
       {{!I-D.ahuang-netconf-notif-yang}}.  Examples of notifications
@@ -730,7 +731,7 @@ This document has no IANA actions.
       propose how to be addressed.
 
    Open Point 3:
-      Test with running code wherever with
+   : Test with running code wherever with
       {{!I-D.ietf-netconf-yang-notifications-versioning}} and
       {{!I-D.lincla-netconf-yang-library-augmentation}} all datastore-
       subtree-filter or datastore-xpath-filter referenced YANG modules
