@@ -169,69 +169,6 @@ informative:
    dependencies are not properly tracked and schema changes adjusted
    simultaneously.
 
-## Document Scope
-
-   This document focuses on YANG-Push {{!RFC8641}} as the messaging
-   protocol between the network node and the Network Telemetry {{?RFC9232}}
-   data collection.  It describes the main components and the aimed
-   architecture for deploying such solution in a production network.
-   Then, it illustrates the integration of the YANG 1.1 {{!RFC7950}} as a
-   schema modeling language into the Apache Kafka Message Broker and
-   Confluent Schema Registry {{Con18}}.
-
-##  Terminology
-
-   This document defines the following terms:
-
-   Message Broker: is an intermediary software component that translates
-   messages from the formal messaging protocol of the sender to the
-   formal messaging protocol of the receiver routed in topics.  Message
-   brokers are elements in Data Mesh where software applications
-   communicate by exchanging formally-defined messages.
-
-   Stream Catalog: provides a single point of access that allows users
-   to centrally search semantics for information across a Message
-   Broker.
-
-   Additionally it makes use of the terms defined in {{!RFC8639}}, Apache
-   Kafka {{Kaf11}} and Confluent Schema Registry Documentation {{ConDoc18}}.
-
-   The following terms are used as defined in {{!RFC8639}}.
-
-   *  Publisher
-
-   *  Receiver
-
-   *  Subscription
-
-   *  Subscription ID
-
-   *  Event stream filter
-
-   *  Notification message
-
-   The following terms are used as defined in Apache Kafka Message
-   Broker {{Kaf11}}.
-
-   *  Producer
-
-   *  Consumer
-
-   *  Topic
-
-   *  Partition
-
-   The following terms are used as defined in Confluent Schema Registry
-   Documentation {{ConDoc18}}.
-
-   *  Schema
-
-   *  Schema ID
-
-   *  Schema Registry
-
-   *  Subject
-
 ##  Origins of YANG-Push
 
    With {{?RFC3535}} the IAB set the requirements for Network Management in
@@ -272,9 +209,74 @@ informative:
    per subject, wherever non backward compatibility changes are allowed
    or not.
 
+## Document Scope
+
+   This document focuses on YANG-Push {{!RFC8641}} as the messaging
+   protocol between the network node and the Network Telemetry {{?RFC9232}}
+   data collection.  It describes the main components and the aimed
+   architecture for deploying such solution in a production network.
+   Then, it illustrates the integration of the YANG 1.1 {{!RFC7950}} as a
+   schema modeling language into the Apache Kafka Message Broker and
+   Confluent Schema Registry {{Con18}}.
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
+
+##  Terminology
+
+   This document defines the following terms:
+
+   Message Broker:
+   : is an intermediary software component that translates
+   messages from the formal messaging protocol of the sender to the
+   formal messaging protocol of the receiver routed in topics.  Message
+   brokers are elements in Data Mesh where software applications
+   communicate by exchanging formally-defined messages.
+
+   Stream Catalog:
+   : provides a single point of access that allows users
+   to centrally search semantics for information across a Message
+   Broker.
+   : Additionally it makes use of the terms defined in {{!RFC8639}}, Apache
+   Kafka {{Kaf11}} and Confluent Schema Registry Documentation {{ConDoc18}}.
+
+   The following terms are used as defined in {{!RFC8639}}:
+
+   *  Publisher
+
+   *  Receiver
+
+   *  Subscription
+
+   *  Subscription ID
+
+   *  Event stream filter
+
+   *  Notification message
+
+   The following terms are used as defined in Apache Kafka Message
+   Broker {{Kaf11}}:
+
+   *  Producer
+
+   *  Consumer
+
+   *  Topic
+
+   *  Partition
+
+   The following terms are used as defined in Confluent Schema Registry
+   Documentation {{ConDoc18}}:
+
+   *  Schema
+
+   *  Schema ID
+
+   *  Schema Registry
+
+   *  Subject
+
 
 # Motivation
 
