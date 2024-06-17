@@ -12,9 +12,9 @@ v: 3
 area: "Operations and Management"
 workgroup: "Network Management Operations"
 keyword:
- - xxx
- - xxx
- - xxxx
+ - Automation
+ - Integration
+ - Data Models
 venue:
   group: "Network Management Operations"
   type: "Working Group"
