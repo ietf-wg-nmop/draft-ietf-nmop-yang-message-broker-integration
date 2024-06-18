@@ -1,0 +1,1040 @@
+
+
+
+
+Network Management Operations                                    T. Graf
+Internet-Draft                                              A. Elhassany
+Intended status: Informational                                  Swisscom
+Expires: 20 December 2024                                   18 June 2024
+
+
+      An Architecture for YANG-Push to Message Broker Integration
+         draft-ietf-nmop-yang-message-broker-integration-latest
+
+Abstract
+
+   This document describes the motivation and architecture of a native
+   YANG-Push notifications and YANG Schema integration into a Message
+   Broker and YANG Schema Registry.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at https://ietf-wg-
+   nmop.github.io/draft-ietf-nmop-yang-message-broker-integration/draft-
+   ietf-nmop-yang-message-broker-integration.html.  Status information
+   for this document may be found at https://datatracker.ietf.org/doc/
+   draft-ietf-nmop-yang-message-broker-integration/.
+
+   Discussion of this document takes place on the Network Management
+   Operations Working Group mailing list (mailto:nmop@ietf.org), which
+   is archived at https://mailarchive.ietf.org/arch/browse/nmop/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/nmop/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/ietf-wg-nmop/draft-ietf-nmop-yang-message-broker-
+   integration.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 20 December 2024.
+
+Copyright Notice
+
+   Copyright (c) 2024 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+     1.1.  Origins of YANG-Push
+     1.2.  Origins of Apache Kafka
+     1.3.  Document Scope
+   2.  Conventions and Definitions
+     2.1.  Terminology
+   3.  Motivation
+     3.1.  Automatic Onboarding
+     3.2.  Preserve Schema
+     3.3.  Preserve Semantic Information
+     3.4.  Standardize Data Processing Integration
+   4.  Elements of the Architecture
+     4.1.  YANG-Push Subscription
+     4.2.  YANG-Push Publisher
+     4.3.  YANG-Push Receiver
+     4.4.  YANG Schema Registry
+     4.5.  YANG Message Broker Producer
+     4.6.  YANG Message_Broker Consumer
+     4.7.  YANG Time Series Database Ingestion
+     4.8.  YANG Time Series Database
+   5.  Implementation Status
+     5.1.  YANG Schema Registry Extension
+     5.2.  YANG-Push Receiver Parsing Library
+     5.3.  YANG Library Augmented-by Addition
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
+   Appendix A.  Project Milestones
+   Appendix B.  Open Points
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   Nowadays network operators are using YANG [RFC7950] to model their
+   configurations and obtain YANG modelled data from their networks.  It
+   is well understood that plain text are initially intended for humans
+   and need effort to make it machine readable due to the lack of
+   semantics.  YANG modeled data is addressing most of these needs.
+
+   Increasingly more network operators organizing their data in a Data
+   Mesh [Deh22] where a Message Broker such as Apache Kafka [Kaf11] or
+   RabbitMQ [Rab07] facilitates the exchange of messages among data
+   processing components like a stream processor to filter, enrich,
+   correlate or aggregate, or a time series database to store data.
+
+   Even though YANG is intend to ease the handling of data, this promise
+   has not yet been fulfilled for Network Telemetry [RFC9232].  From
+   subscribing on a YANG datastore, publishing a YANG modeled
+   notifications message from the network and viewing the data in a time
+   series database, manual labor, such as obtaining the YANG schema from
+   the network and creating a transformation or ingestion specification
+   into a time series database, is needed to make a Message Broker and
+   its data processing components with YANG notifications interoparable.
+   Since YANG modules can change over time, for example when a router is
+   being upgraded to a newer software release, this process needs to be
+   adjusted contionously, leading often to errors in the data chain if
+   dependencies are not properly tracked and schema changes adjusted
+   simultaneously.
+
+1.1.  Origins of YANG-Push
+
+   With [RFC3535] the IAB set the requirements for Network Management in
+   2003.  From these requirements NETCONF [RFC6241], NETCONF
+   Notifications [RFC5277] and RESTCONF [RFC8040] have been defined to
+   configure through <edit-config> and retrieve operational data through
+   <get> and NETCONF notifications through <notification> from a YANG
+   datastore on a network node.
+
+   With YANG-Push, as defined in [RFC8639], [RFC8640] and [RFC8641],
+   periodical and on-change subscriptions to the YANG datastore can be
+   dynamically or statically configured.  When notifications are
+   dynamically configured, messages are published over the initially
+   established NETCONF session, while when it is statically configured
+   messages are published through HTTPS-based
+   [I-D.ietf-netconf-https-notif] or UDP-based
+   [I-D.ietf-netconf-udp-notif] transport.  Section 3.7 of [RFC8641]
+   describes push-update messages where the YANG subscribed data is
+   being published, where Section 2.7 of [RFC8639] describes the
+   subscription state change notifications where changes in the
+   subscription are being described.
+
+1.2.  Origins of Apache Kafka
+
+   Apache Kafka [Kaf11] is a Message Broker that supports producing and
+   consuming messages from so called topics.  Each topic has one or more
+   partitions where messages are replicated or load balanced to scale
+   out.  With the introduction of Confluent Schema Registry [Con18] a
+   topic can contain one or more subjects.  A subject refers to a Schema
+   defining the structure of the message.  The Schema then is used to
+   validate messages sent through topics and are identified by a Schema
+   ID.  The Schema ID is issued when the Schema is registered to the
+   Confluent Schema Registry.  Once the Schema ID is obtained, it can be
+   prefixed to the message with a Confluent Schema Registry compatible
+   serializer.  Messages can then be validated against Schema at the
+   producer or at the consumer from a topic to ensure Schema integrity
+   of the message.  The type of Schema evolution scheme can be defined
+   per subject, wherever non backward compatibility changes are allowed
+   or not.
+
+1.3.  Document Scope
+
+   This document focuses on YANG-Push [RFC8641] as the messaging
+   protocol between the network node and the Network Telemetry [RFC9232]
+   data collection.  It describes the main components and the aimed
+   architecture for deploying such solution in a production network.
+   Then, it illustrates the integration of the YANG 1.1 [RFC7950] as a
+   schema modeling language into the Apache Kafka Message Broker and
+   Confluent Schema Registry [Con18].
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.1.  Terminology
+
+   This document defines the following terms:
+
+   Message Broker:  is an intermediary software component that
+      translates messages from the formal messaging protocol of the
+      sender to the formal messaging protocol of the receiver routed in
+      topics.  Message brokers are elements in Data Mesh where software
+      applications communicate by exchanging formally-defined messages.
+
+   Stream Catalog:  provides a single point of access that allows users
+      to centrally search semantics for information across a Message
+      Broker.
+
+      Additionally it makes use of the terms defined in [RFC8639],
+      Apache Kafka [Kaf11] and Confluent Schema Registry Documentation
+      [ConDoc18].
+
+   The following terms are used as defined in [RFC8639]:
+
+   *  Publisher
+
+   *  Receiver
+
+   *  Subscription
+
+   *  Subscription ID
+
+   *  Event stream filter
+
+   *  Notification message
+
+   The following terms are used as defined in Apache Kafka Message
+   Broker [Kaf11]:
+
+   *  Producer
+
+   *  Consumer
+
+   *  Topic
+
+   *  Partition
+
+   The following terms are used as defined in Confluent Schema Registry
+   Documentation [ConDoc18]:
+
+   *  Schema
+
+   *  Schema ID
+
+   *  Schema Registry
+
+   *  Subject
+
+3.  Motivation
+
+   There are four main objectives for native YANG-Push notifications and
+   YANG Schema integration into a Message Broker.
+
+3.1.  Automatic Onboarding
+
+   Automate the Data Mesh onboarding of newly subscribed YANG metrics.
+
+3.2.  Preserve Schema
+
+   The preservation of the YANG schema, that includes the YANG data
+   types as defined in [RFC6991] and the nested structure of the YANG
+   module, throughout the data processing chain ensures that metrics can
+   be processed and visualized as they were originally intended.  Not
+   only for users but also for automated closed loop operation actions.
+
+3.3.  Preserve Semantic Information
+
+   [RFC7950] defines in Section 7.21.3 and 7.21.4 the description and
+   reference statement.  This information is intended for the user,
+   describing in a human-readable fashion the meaning of a definition.
+   In Data Mesh, this information can be imported from the YANG Schema
+   Registry into a Stream Catalog where subjects within Message Broker
+   are identifiable and searchable.  An example of a Stream Catalog is
+   Apache Atlas [Atl15].  It can also be applied for time series data
+   visualization in a similar fashion.
+
+3.4.  Standardize Data Processing Integration
+
+   Since the YANG Schema is preserved for operational metrics in the
+   Message Broker, a standardization for integration between network
+   data collection and stream processor or time series database is
+   implied.
+
+4.  Elements of the Architecture
+
+   The architecture consists of 6 elements.  Figure 1 gives an overview
+   on the workflow.
+
+       +------------------------------------------------------------+
+       |                    Time Series Database                    |
+       +------------------------------------------------------------+
+                                      ^
+                                      | (12) Ingest Data
+                                      | According to Schema
+       +------------------------------------------------------------+
+       |                Time Series Database Ingestion              |
+       +------------------------------------------------------------+
+    (10) Get |  ^                                   ^ (9) Validate
+      Schema |  |                                   | Serialized Message
+             |  |                                   | Schema on Consumer
+             |  |                                   |
+             |  |                              +--------------------+
+             |  |                              |      Message       |
+             |  |                              |      Broker        |
+             |  |                              +--------------------+
+             |  |                                   |
+             |  | (11) Issue                        | (8) Serialize
+             |  |                                   | YANG-Push Message
+             |  |                                   | annotated Schema
+             v  | Schema             (6) Post       | ID on Producer
+       +--------------------+          Schema  +--------------------+
+       |       YANG         | <--------------  |  Data Collection   |
+       |  Schema Registry   | -------------->  | YANG-Push Receiver |
+       +--------------------+ (7) Issue        +--------------------+
+                              Schema ID     (4) Get |  ^ (3) Receive
+                                             Schema |  | YANG-Push
+                                                    |  | Subscription
+                                                    |  | Start Message
+                                                    |  |   ^
+                                                    |  |   |
+                                                    |  |   | (5) Publish
+                                                    |  |   | YANG-Push
+                                                    |  |   | Message
+                                                    |  |   | with
+                              (1) Discover Notif.   v  |   | Subscr. ID
+       +--------------------+ Capabilities     +--------------------+
+       |  Manage YANG-Push  | ---------------> |   Network Node     |
+       |    Subscription    | (2) Subscribe    | YANG-Push Publisher|
+       +--------------------+ ---------------> +--------------------+
+
+                     Figure 1: End to End Workflow
+
+   The workflow diagram (Figure 1) describes the steps from establishing
+   the YANG-Push subscription to Time Series Database ingestion.
+
+4.1.  YANG-Push Subscription
+
+   With step number (1) in the workflow diagram, the YANG-Push
+   notification capabilities are being discovered according to Section 3
+   of [RFC9196], in with step (2) a YANG-Push subscription is according
+   to Sections 2.4 and 2.5 of [RFC8639] dynamically or statically
+   configured, and with step (3) subscription state change notifications
+   are sent according to Section 2.7 from the YANG-Push publisher to the
+   receiver to inform which event stream filter has been applied to
+   which subscription ID.
+
+   When the YANG-Push subscription is managed dynamically, the YANG data
+   is being received on the same NETCONF session where the subscription
+   is being maintained.  With configured subscription the YANG data is
+   sent to the YANG-Push receiver through a separate transport session.
+
+   [I-D.ietf-netconf-yang-notifications-versioning] adds the capability
+   to subscribe to a specific YANG module revision or a YANG module
+   which needs to be backward compatible to in step (2) and adds the
+   module name, revision and revision-label information into the
+   subscription state change notifications in step (3).
+
+   Figure 2 provides and example how to create a YANG-Push configured
+   subscription with NETCONF in XML [W3C.REC-xml-20081126] with UDP-
+   based [I-D.ietf-netconf-udp-notif] transport.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+    <rpc message-id="101"
+      xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <edit-config>
+        <target>
+          <running/>
+        </target>
+        <config>
+          <subscriptions xmlns="urn:ietf:params:xml:ns:yang:ietf-\
+                                              subscribed-notifications">
+            <subscription>
+              <id>6666</id>
+              <datastore xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-\
+                                                                   push"
+                xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">\
+                                              ds:operational</datastore>
+              <datastore-xpath-filter xmlns="urn:ietf:params:xml:ns:\
+                                                    yang:ietf-yang-push"
+                xmlns:if="urn:ietf:params:xml:ns:yang:ietf-interfaces">\
+                                 /if:interfaces</datastore-xpath-filter>
+              <revision xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-\
+                                    push-revision">2018-02-20</revision>
+              <transport xmlns:unt="urn:ietf:params:xml:ns:yang:ietf-\
+                          udp-notif-transport">unt:udp-notif</transport>
+              <encoding>encode-json</encoding>
+              <receivers>
+                <receiver>
+                  <name>subscription-specific-receiver-def</name>
+                  <receiver-instance-ref xmlns="urn:ietf:params:xml:ns:\
+   yang:ietf-subscribed-notif-receivers">global-udp-notif-receiver-def<\
+                                                 /receiver-instance-ref>
+                </receiver>
+              </receivers>
+              <periodic xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-\
+                                                                  push">
+                <period>6000</period>
+              </periodic>
+            </subscription>
+            <receiver-instances xmlns="urn:ietf:params:xml:ns:yang:ietf\
+                                           -subscribed-notif-receivers">
+              <receiver-instance>
+                <name>global-udp-notif-receiver-def</name>
+                <udp-notif-receiver xmlns="urn:ietf:params:xml:ns:yang:\
+                                              ietf-udp-notif-transport">
+                  <address>192.0.5.1</address>
+                  <port>12345</port>
+                  <enable-segmentation>false</enable-segmentation>
+                  <max-segment-size/>
+                </udp-notif-receiver>
+              </receiver-instance>
+            </receiver-instances>
+          </subscriptions>
+        </config>
+      </edit-config>
+    </rpc>
+
+       Figure 2: NETCONF Example to establish configured subscription
+
+   Figure 3 provides an example of a JSON encoded, [RFC7951],
+   subscription-started state change notification message over HTTPS-
+   based [I-D.ietf-netconf-https-notif] or UDP-based
+   [I-D.ietf-netconf-udp-notif] transport with
+   [I-D.tgraf-netconf-notif-sequencing],
+   [I-D.tgraf-netconf-yang-push-observation-time] and
+   [I-D.ietf-netconf-yang-notifications-versioning] as extensions for
+   the same subscription.
+
+    {
+      "ietf-notification:notification": {
+        "eventTime": "2023-03-25T08:30:11.22Z",
+        "ietf-notification-sequencing:sysName": "example-router",
+        "ietf-notification-sequencing:sequenceNumber": 1,
+        "ietf-subscribed-notification:subscription-started": {
+          "id": 6666,
+          "ietf-yang-push:datastore": "ietf-datastores:operational",
+          "ietf-yang-push:datastore-xpath-filter": "/if:interfaces",
+          "ietf-yang-push-revision:revision": "2014-05-08",
+          "ietf-yang-push-revision:module-name": "ietf-interfaces",
+          "ietf-yang-push-revision:revision-label": "",
+          "ietf-distributed-notif:message-observation-domain-id": [1,2],
+          "transport": "ietf-udp-notif-transport:udp-notif",
+          "encoding": "encode-json",
+          "ietf-yang-push:periodic": {
+            "ietf-yang-push:period": 100
+          }
+        }
+      }
+    }
+
+      Figure 3: JSON YANG-Push Example for a subscription-started
+                          notification message
+
+4.2.  YANG-Push Publisher
+
+   With step number (4) in the workflow diagram, a YANG-Push push-update
+   or push-change-update message, depending on wherever periodical or
+   on-change subscription has been established, is sent from the YANG-
+   Push publisher to the receiver according to Section 3.7 of [RFC8639].
+
+   [I-D.ahuang-netconf-notif-yang] defines the NETCONF notification
+   header specified in [RFC5277] in YANG to enable JSON and CBOR
+   encoding.
+
+   [I-D.tgraf-netconf-notif-sequencing] adds sysName, messagePublisherId
+   and sequenceNumber in the NETCONF notification header to each message
+   to identify from which network node and publishing process, according
+   to [I-D.ietf-netconf-distributed-notif] a network node with
+   distributed architecture could have multiple messagePublisherId's,
+   the message has been published from.  The sequenceNumber enables to
+   recognize loss from the YANG-Push publisher in step (2) down to the
+   Time Series Database Ingestion in step (12).
+
+   [I-D.tgraf-netconf-yang-push-observation-time] adds observation-time
+   and point-in-time in the YANG-Push push-update or push-change-update
+   message. observation-time contains the timestamp and point-in-time
+   when the metrics where observed.  See Section 3 of
+   [I-D.tgraf-netconf-yang-push-observation-time] for more details.
+
+   Figure 4 provides an example of a JSON encoded, [RFC7951], push-
+   update notification message over HTTPS-based
+   [I-D.ietf-netconf-https-notif] or UDP-based
+   [I-D.ietf-netconf-udp-notif] transport with
+   [I-D.tgraf-netconf-notif-sequencing] and
+   [I-D.tgraf-netconf-yang-push-observation-time] as extensions for the
+   same subscription.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+      {
+        "ietf-notification:notification": {
+          "eventTime": "2023-03-25T08:30:11.22Z",
+          "ietf-notification-sequencing:sysName": "example-router",
+          "ietf-notification-sequencing:sequenceNumber": 1,
+          "ietf-yang-push:push-update": {
+            "id": 6666,
+            "ietf-yang-push-observation-timestamp:observation-time": "\
+                                               2023-03-25T08:30:11.22Z",
+            "ietf-yang-push-observation-timestamp:point-in-time": "\
+                                                         state-changed",
+            "datastore-contents": {
+              "ietf-interfaces:interfaces": [
+                {
+                  "interface": {
+                    "name": "eth0",
+                    "type": "iana-if-type:ethernetCsmacd",
+                    "oper-status": "up",
+                    "mtu": 1500
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+
+      Figure 4: JSON YANG-Push Example for a push-update notification
+                                  message
+
+   Figure 5 provides an example of a JSON encoded, [RFC7951], push-
+   change-update notification message over HTTPS-based
+   [I-D.ietf-netconf-https-notif] or UDP-based
+   [I-D.ietf-netconf-udp-notif] transport with
+   [I-D.tgraf-netconf-notif-sequencing] and
+   [I-D.tgraf-netconf-yang-push-observation-time] as extensions for the
+   same subscription.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+      {
+        "ietf-notification:notification": {
+          "eventTime": "2023-03-25T08:30:11.22Z",
+          "ietf-notification-sequencing:sysName": "example-router",
+          "ietf-notification-sequencing:sequenceNumber": 1,
+          "ietf-yang-push:push-change-update": {
+            "id": 2222,
+            "ietf-yang-push-observation-timestamp:observation-time": "\
+                                               2023-03-25T08:30:11.22Z",
+            "ietf-yang-push-observation-timestamp:point-in-time": "\
+                                                         state-changed",
+            "datastore-contents": {
+              "yang-patch": {
+                "patch-id": "patch_54",
+                "comment": "Changing encoding to JSON and increasing \
+                                              the period to 10 minutes",
+                "edit": [
+                  {
+                    "edit-id": "id_change_1",
+                    "operation": "merge",
+                    "target": "/ietf-subscribed-notifications:\
+                                   subscriptions/subscription[id=2222]",
+                    "value": {
+                      "ietf-subscribed-notifications:encoding":
+                      "ietf-subscribed-notifications:encode-json",
+                      "ietf-yang-push:periodic": {
+                        "period": 60000
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+
+         Figure 5: JSON YANG-Push Example for a push-change-update
+                            notification message
+
+4.3.  YANG-Push Receiver
+
+   For all the YANG modules and revisions of each subscription ID in the
+   subscription state change notification received in step number (3) in
+   the workflow diagram, all the YANG module dependencies need to be
+   determined through the YANG Library [RFC8525], and then through
+   NETCONF <get-schema> rpc calls according to [RFC6022] all YANG
+   modules need to be retrieved as described in step (4) in the workflow
+   diagram.
+
+   [I-D.lincla-netconf-yang-library-augmentation] extends the YANG
+   Library so that not only the submodule but also the augmentation list
+   can be obtained.
+
+   Figure 9 in Section 4.1 and YANG module in Section 5 of [RFC8641]
+   define the payload of YANG-push notifications where "datastore-
+   contents" or the "value" of a "push-change-update") is "anydata".
+   Section 7.10 of [RFC7950] states that anydata represents an unknown
+   set of nodes that can be modeled with YANG, and the model is not
+   known at design time and that the model of the unknown set of nodes
+   can be signaled through another protocol.  This poses and issue in
+   the schema validation of YANG-Push notifications and will be further
+   clarified in point number (1) and (2) in Appendix B.
+
+4.4.  YANG Schema Registry
+
+   The schema registry SHOULD support YANG as the format for defining
+   schema.  For each schema registered into the schema registry, a
+   schema ID is returned.  That schema ID can be used when interacting
+   with the Message Broker to indicate the schema to use with the
+   message.”
+
+   Confluent Schema Registry is pluggable.  Currently Supports AVRO,
+   JSON Schema and Protobuf.  The YANG support is being developed at
+   [Yak24] as part of this architecture.  Enable to register, obtain and
+   compare [YSR24] YANG Schemas.  One YANG Schema with all its
+   augmentations is being registered per YANG-Push subscription ID. for
+   each YANG Schema a locally significant Schema ID is being issued as
+   described in step (7) in the workflow diagram.
+
+  curl -X POST -H "Content Type: application/vnd.schemaregistry.v1+json"
+  -d @ietf-interfaces@2018-02-20.json
+  http://localhost:8081/subjects/ietf-interfaces/
+
+  Figure 6: Register ietf-interfaces.yang into YANG Schema Registry
+
+      curl http://localhost:8081/subjects/ ubjects/ | jq
+
+              Figure 7: List all subjects YANG Schema Registry
+
+      curl http://localhost:8081/subjects/ietf-interfaces/versions
+
+     Figure 8: List versions of a given subject in YANG Schema Registry
+
+      curl http://localhost:8081/subjects/ietf-interfaces/versions/1
+
+       Figure 9: Retrieve schema of a specific subject and version in
+                            YANG Schema Registry
+
+4.5.  YANG Message Broker Producer
+
+   The previously issued Schema ID is prefixed to the previously in
+   Section 3.3 described metadata augmented YANG push push-update
+   message and serialized to a Message Broker topic in step (8) of the
+   workflow diagram.
+
+4.6.  YANG Message_Broker Consumer
+
+   From the Message Broker topic the message is being consumed and the
+   prefixed Schema ID is being used in step (10) of the workflow diagram
+   to retrieve the YANG Schema to validate the Schema integrity of the
+   message.
+
+4.7.  YANG Time Series Database Ingestion
+
+   The time series database ingestion specifications are being derived
+   with the in Section 3.6 already retrieved Schema ID and YANG-Push
+   push-update messages can be now ingested and indexed into the
+   database table according to their schema in step (12).
+
+4.8.  YANG Time Series Database
+
+   The YANG data is being ingested in step (12)according to the
+   previously defined ingestion specification and indexed with the
+   timestamp defined in observation-time as defined in
+   [I-D.tgraf-netconf-yang-push-observation-time].  A network operator
+   is now able to query the previously subscribed YANG data.
+
+5.  Implementation Status
+
+      Note to the RFC-Editor: Please remove this section before
+      publishing.
+
+   This section records the status of known implementations of the
+   protocol defined by this specification at the time of posting of this
+   Internet-Draft, and is based on a proposal described in [RFC7942].
+   The description of implementations in this section is intended to
+   assist the IETF in its decision processes in progressing drafts to
+   RFCs.  Please note that the listing of any individual implementation
+   here does not imply endorsement by the IETF.  Furthermore, no effort
+   has been spent to verify the information presented here that was
+   supplied by IETF contributors.  This is not intended as, and must not
+   be construed to be, a catalog of available implementations or their
+   features.  Readers are advised to note that other implementations may
+   exist.
+
+   According to [RFC7942], "this will allow reviewers and working groups
+   to assign due consideration to documents that have the benefit of
+   running code, which may serve as evidence of valuable experimentation
+   and feedback that have made the implemented protocols more mature.
+   It is up to the individual working groups to use this information as
+   they see fit".
+
+5.1.  YANG Schema Registry Extension
+
+   Ahmed Elhassany is developing a YANG Schema Extension in Confluent
+   Schema Registry.
+
+   The source code can be obtained here: [YSR24], the progress report
+   here: [YSRPR24], and was validated at the IETF 117 hackathon.
+
+5.2.  YANG-Push Receiver Parsing Library
+
+   Zhuoyao Lin developed as part of her internship a library to parse
+   YANG-Push subscription notifications, identify YANG module
+   dependencises with YANG Library [RFC8525] and obtain with NETCONF
+   <get-schema> rpc calls [RFC6022] all YANG modules from YANG-Push
+   publisher.
+
+   The source code can be obtained here: [LYP23] and was validated at
+   the IETF 117 hackathon.
+
+5.3.  YANG Library Augmented-by Addition
+
+   Zhuoyao Lin implemented
+   [I-D.lincla-netconf-yang-library-augmentation] in order to discover
+   augmented-by YANG modules in YANG Library [RFC8525].
+
+   The source code can be obtained here: [YLA24] and was validated at
+   the IETF 119 hackathon.
+
+6.  Security Considerations
+
+   TBD
+
+7.  IANA Considerations
+
+   This document has no IANA actions.
+
+8.  References
+
+8.1.  Normative References
+
+   [I-D.aelhassany-anydata-validation]
+              Elhassany, A., "Validating anydata in YANG Library
+              context", Work in Progress, Internet-Draft, draft-
+              aelhassany-anydata-validation-01, 17 March 2024,
+              <https://datatracker.ietf.org/doc/html/draft-aelhassany-
+              anydata-validation-01>.
+
+   [I-D.ahuang-netconf-notif-yang]
+              Feng, A. H., Francois, P., Graf, T., and B. Claise, "YANG
+              model for NETCONF Event Notifications", Work in Progress,
+              Internet-Draft, draft-ahuang-netconf-notif-yang-04, 21
+              January 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ahuang-netconf-notif-yang-04>.
+
+   [I-D.ietf-netconf-yang-notifications-versioning]
+              Graf, T., Claise, B., and A. H. Feng, "Support of
+              Versioning in YANG Notifications Subscription", Work in
+              Progress, Internet-Draft, draft-ietf-netconf-yang-
+              notifications-versioning-05, 16 June 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              yang-notifications-versioning-05>.
+
+   [I-D.lincla-netconf-yang-library-augmentation]
+              Lin, Z., Claise, B., and I. D. Martinez-Casanueva,
+              "Augmented-by Addition into the IETF-YANG-Library", Work
+              in Progress, Internet-Draft, draft-lincla-netconf-yang-
+              library-augmentation-01, 4 March 2024,
+              <https://datatracker.ietf.org/doc/html/draft-lincla-
+              netconf-yang-library-augmentation-01>.
+
+   [I-D.tgraf-netconf-notif-sequencing]
+              Graf, T., Quilbeuf, J., and A. H. Feng, "Support of
+              Hostname and Sequencing in YANG Notifications", Work in
+              Progress, Internet-Draft, draft-tgraf-netconf-notif-
+              sequencing-04, 28 April 2024,
+              <https://datatracker.ietf.org/doc/html/draft-tgraf-
+              netconf-notif-sequencing-04>.
+
+   [I-D.tgraf-netconf-yang-push-observation-time]
+              Graf, T., Claise, B., and A. H. Feng, "Support of Network
+              Observation Timestamping in YANG Notifications", Work in
+              Progress, Internet-Draft, draft-tgraf-netconf-yang-push-
+              observation-time-01, 14 April 2024,
+              <https://datatracker.ietf.org/doc/html/draft-tgraf-
+              netconf-yang-push-observation-time-01>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC6022]  Scott, M. and M. Bjorklund, "YANG Module for NETCONF
+              Monitoring", RFC 6022, DOI 10.17487/RFC6022, October 2010,
+              <https://www.rfc-editor.org/rfc/rfc6022>.
+
+   [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
+              RFC 7950, DOI 10.17487/RFC7950, August 2016,
+              <https://www.rfc-editor.org/rfc/rfc7950>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8639]  Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
+              E., and A. Tripathy, "Subscription to YANG Notifications",
+              RFC 8639, DOI 10.17487/RFC8639, September 2019,
+              <https://www.rfc-editor.org/rfc/rfc8639>.
+
+   [RFC8641]  Clemm, A. and E. Voit, "Subscription to YANG Notifications
+              for Datastore Updates", RFC 8641, DOI 10.17487/RFC8641,
+              September 2019, <https://www.rfc-editor.org/rfc/rfc8641>.
+
+   [RFC9196]  Lengyel, B., Clemm, A., and B. Claise, "YANG Modules
+              Describing Capabilities for Systems and Datastore Update
+              Notifications", RFC 9196, DOI 10.17487/RFC9196, February
+              2022, <https://www.rfc-editor.org/rfc/rfc9196>.
+
+   [RFC9254]  Veillette, M., Ed., Petrov, I., Ed., Pelov, A., Bormann,
+              C., and M. Richardson, "Encoding of Data Modeled with YANG
+              in the Concise Binary Object Representation (CBOR)",
+              RFC 9254, DOI 10.17487/RFC9254, July 2022,
+              <https://www.rfc-editor.org/rfc/rfc9254>.
+
+8.2.  Informative References
+
+   [Atl15]    Hortonworks, "Apache Atlas", May 2015,
+              <https://atlas.apache.org/>.
+
+   [Con18]    Yokota, R., "Confluent Schema Registry", December 2018,
+              <https://github.com/confluentinc/schema-registry/>.
+
+   [ConDoc18] Yokota, R., "Confluent Schema Registry Documentation",
+              December 2018,
+              <https://docs.confluent.io/platform/current/schema-
+              registry/>.
+
+   [Deh22]    Dehghani, Z., "Data Mesh", March 2022,
+              <https://www.oreilly.com/library/view/data-
+              mesh/9781492092384/>.
+
+   [I-D.ietf-netconf-distributed-notif]
+              Zhou, T., Zheng, G., Voit, E., Graf, T., and P. Francois,
+              "Subscription to Distributed Notifications", Work in
+              Progress, Internet-Draft, draft-ietf-netconf-distributed-
+              notif-09, 28 April 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              distributed-notif-09>.
+
+   [I-D.ietf-netconf-https-notif]
+              Jethanandani, M. and K. Watsen, "An HTTPS-based Transport
+              for YANG Notifications", Work in Progress, Internet-Draft,
+              draft-ietf-netconf-https-notif-15, 1 February 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              https-notif-15>.
+
+   [I-D.ietf-netconf-udp-notif]
+              Zheng, G., Zhou, T., Graf, T., Francois, P., Feng, A. H.,
+              and P. Lucente, "UDP-based Transport for Configured
+              Subscriptions", Work in Progress, Internet-Draft, draft-
+              ietf-netconf-udp-notif-12, 21 January 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              udp-notif-12>.
+
+   [Kaf11]    Narkhede, N., "Apache Kafka", January 2011,
+              <https://kafka.apache.org/>.
+
+   [LYP23]    Lin, Z., "libyangpush", September 2023,
+              <https://github.com/network-analytics/libyangpush/>.
+
+   [Rab07]    VMware, "RabbitMQ", <https://rabbitmq.com/>.
+
+   [RFC3535]  Schoenwaelder, J., "Overview of the 2002 IAB Network
+              Management Workshop", RFC 3535, DOI 10.17487/RFC3535, May
+              2003, <https://www.rfc-editor.org/rfc/rfc3535>.
+
+   [RFC5277]  Chisholm, S. and H. Trevino, "NETCONF Event
+              Notifications", RFC 5277, DOI 10.17487/RFC5277, July 2008,
+              <https://www.rfc-editor.org/rfc/rfc5277>.
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/rfc/rfc6241>.
+
+   [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
+              RFC 6991, DOI 10.17487/RFC6991, July 2013,
+              <https://www.rfc-editor.org/rfc/rfc6991>.
+
+   [RFC7942]  Sheffer, Y. and A. Farrel, "Improving Awareness of Running
+              Code: The Implementation Status Section", BCP 205,
+              RFC 7942, DOI 10.17487/RFC7942, July 2016,
+              <https://www.rfc-editor.org/rfc/rfc7942>.
+
+   [RFC7951]  Lhotka, L., "JSON Encoding of Data Modeled with YANG",
+              RFC 7951, DOI 10.17487/RFC7951, August 2016,
+              <https://www.rfc-editor.org/rfc/rfc7951>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8040>.
+
+   [RFC8525]  Bierman, A., Bjorklund, M., Schoenwaelder, J., Watsen, K.,
+              and R. Wilton, "YANG Library", RFC 8525,
+              DOI 10.17487/RFC8525, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8525>.
+
+   [RFC8640]  Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
+              E., and A. Tripathy, "Dynamic Subscription to YANG Events
+              and Datastores over NETCONF", RFC 8640,
+              DOI 10.17487/RFC8640, September 2019,
+              <https://www.rfc-editor.org/rfc/rfc8640>.
+
+   [RFC9232]  Song, H., Qin, F., Martinez-Julia, P., Ciavaglia, L., and
+              A. Wang, "Network Telemetry Framework", RFC 9232,
+              DOI 10.17487/RFC9232, May 2022,
+              <https://www.rfc-editor.org/rfc/rfc9232>.
+
+   [W3C.REC-xml-20081126]
+              Bray, T., Paoli, J., Sperberg-McQueen, C. M., Maler, E.,
+              and F. Yergeau, "Extensible Markup Language (XML) 1.0
+              (Fifth Edition)", W3C World Wide Web Consortium
+              Recommendation REC-xml-20081126, November 2008,
+              <https://www.w3.org/TR/2008/REC-xml-20081126>.
+
+   [Yak24]    Feng, F., "Yangkit", February 2024,
+              <https://github.com/yang-central/yangkit/>.
+
+   [YLA24]    Lin, Z., "libyangpush", March 2024,
+              <https://github.com/Zephyre777/draft-lincla-netconf-yang-
+              library-augmentation/>.
+
+   [YSR24]    Elhassany, A., "YANG Schema Registry Extension", February
+              2024, <https://github.com/confluentinc/schema-registry-
+              yang-format/>.
+
+   [YSRPR24]  Elhassany, A., "YANG Schema Registry Extension Progress
+              Report", February 2024, <https://github.com/network-
+              analytics/draft-daisy-kafka-yang-integration/blob/main/
+              YANG%20Schema%20registry%20integration.pdf>.
+
+Appendix A.  Project Milestones
+
+   IETF 115:
+
+   *  Official Project Kickoff.
+
+   *  [I-D.ietf-netconf-yang-notifications-versioning] extends schema
+      reference in subscription state change notification.
+
+   IETF 116:
+
+   *  YANG module with augmentations can be registered in Confluent
+      Schema Registry with YANG extension [Yak24].
+
+   *  [I-D.tgraf-netconf-notif-sequencing] extends NETCONF notification
+      header with sysName, messagePublisherId and sequenceNumber.
+
+   *  [I-D.tgraf-netconf-yang-push-observation-time] extends YANG-Push
+      push-update or push-change-update message with observation-time or
+      state-changed-observation-time.
+
+   *  [I-D.ahuang-netconf-notif-yang] defines the NETCONF notification
+      header specified in [RFC5277] in YANG.
+
+   IETF 118:
+
+   *  All relevant YANG modules for a subscribed xpath can be determined
+      through the YANG Library [RFC8525] and retrieved throug NETCONF
+      <get-schema> rpc calls according to [RFC6022].  Gap in YANG
+      library addressed in
+      [I-D.lincla-netconf-yang-library-augmentation].
+
+   IETF 119:
+
+   *  [I-D.aelhassany-anydata-validation] addresses that anydata modeled
+      nodes can be validated with YANG Library RFC 8525.  6WIND VSR and
+      Huawei VRP YANG-Push publisher and open-source
+      [I-D.lincla-netconf-yang-library-augmentation] implementation
+      validated at hackathon.
+
+   IETF 120:
+
+   *  6WIND VSR, Huawei VRP and Cisco IOS XR YANG-Push publisher and
+      [I-D.aelhassany-anydata-validation] implementation validated at
+      hackathon.
+
+   *  [I-D.tgraf-netconf-yang-push-observation-time] merges both
+      timestamps for periodical and on-change YANG-Push subscriptions
+      into one observation-time timestamp and adding a decleration
+      point-in-time to describe when the observation was obesreved.
+
+Appendix B.  Open Points
+
+   Lists all current open points to be either further researched and
+   clarified or tested with running code.
+
+   Note to the RFC-Editor: Please remove this section before publishing.
+
+   Open Point 1:
+      Figure 9 in Section 4.1 and YANG module in Section 5 of [RFC8641]
+      defines the payload of YANG-push notifications where "datastore-
+      contents" or the "value" of a "push-change-update") is "anydata".
+      [RFC7950] Section 7.10 states that anydata represents an unknown
+      set of nodes that can be modeled with YANG, and the model is not
+      known at design time and that the model of the unknown set of
+      nodes can be signaled through another protocol.  How to exchange
+      the anydata modeled nodes between the YANG-Push publisher and the
+      receiver given that the data nodes contained in anydata subtree is
+      potentially incomplete (filtered out by xpath or subtree).  How
+      can a YANG-Push receiver validate the content of anydata nodes?
+      [I-D.aelhassany-anydata-validation] addresses this by using YANG
+      Library [RFC8525] as mechanism to exchange the YANG model of the
+      nodes contained in anydata.
+
+   Open Point 2:
+      The NETCONF Notification structure is defined in [RFC5277] using a
+      XSD Schema.  For YANG-push [RFC8641], this XSD Schema has been
+      proposed using YANG 1.1 [RFC7950] modeling language in
+      [I-D.ahuang-netconf-notif-yang].  Examples of notifications
+      encoded in XML are provided in Section 5 of [RFC5277].  In YANG-
+      JSON [RFC7951], the specification does not provide any examples on
+      how notifications should be encoded.  In YANG-CBOR [RFC9254],
+      notifications are considered "container-like" instances and
+      examples does not show consistency with XML-based and YANG-JSON
+      encoding notifications.  Assumptions are being made in
+      [I-D.ahuang-netconf-notif-yang] providing examples of YANG-JSON
+      and YANG-CBOR encoded notifications.  The notification structure
+      needs consistency accross YANG encodings.  Confirm findings and
+      propose how to be addressed.
+
+   Open Point 3:
+      Test with running code wherever with
+      [I-D.ietf-netconf-yang-notifications-versioning] and
+      [I-D.lincla-netconf-yang-library-augmentation] all datastore-
+      subtree-filter or datastore-xpath-filter referenced YANG modules
+      and their dependencies can be fully indentified.
+
+Acknowledgments
+
+   The authors would like to thank Yannick Buchs and Benoit Claise for
+   their review and valuable comments.  Alex Huang Feng, Jean Quilbeuf
+   and Zhuoyao Lin for review and contributing code and providing
+   examples and inputs to the open points.
+
+Authors' Addresses
+
+   Thomas Graf
+   Swisscom
+   Binzring 17
+   CH-Zuerich 8045
+   Switzerland
+   Email: thomas.graf@swisscom.com
+
+
+   Ahmed Elhassany
+   Swisscom
+   Binzring 17
+   CH-Zuerich 8045
+   Switzerland
+   Email: ahmed.elhassany@swisscom.com
