@@ -371,9 +371,9 @@ informative:
    With step number (1) in the workflow diagram, the YANG-Push
    notification capabilities are being discovered according to Section 3
    of {{!RFC9196}}, in with step (2) a YANG-Push subscription is according
-   to {{Section 2.4 and 2.5 of !RFC8639}} dynamically or statically
+   to Sections 2.4 and 2.5 of {{!RFC8639}} dynamically or statically
    configured, and with step (3) subscription state change notifications
-   are sent according to section 2.7 from the YANG-Push publisher to the
+   are sent according to Section 2.7 from the YANG-Push publisher to the
    receiver to inform which event stream filter has been applied to
    which subscription ID.
 
