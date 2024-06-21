@@ -1034,7 +1034,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Graf &amp; Elhassany</td>
-<td class="center">Expires 20 December 2024</td>
+<td class="center">Expires 23 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1047,12 +1047,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-nmop-yang-message-broker-integration-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-18" class="published">18 June 2024</time>
+<time datetime="2024-06-21" class="published">21 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-20">20 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-23">23 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1108,7 +1108,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1287,7 +1287,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h3>
 <p id="section-1.1-1">With <span>[<a href="#RFC3535" class="cite xref">RFC3535</a>]</span> the IAB set the requirements for Network Management in
    2003.  From these requirements NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span>, NETCONF
-   Notifications <span>[<a href="#RFC5277" class="cite xref">RFC5277</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span> has been defined to
+   Notifications <span>[<a href="#RFC5277" class="cite xref">RFC5277</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span> have been defined to
    configure through <code>&lt;edit-config&gt;</code> and retrieve operational data through
    <code>&lt;get&gt;</code> and NETCONF notifications through <code>&lt;notification&gt;</code> from a YANG
    datastore on a network node.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
@@ -1298,9 +1298,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
    established NETCONF session, while when it is statically configured
    messages are published through HTTPS-based
    <span>[<a href="#I-D.ietf-netconf-https-notif" class="cite xref">I-D.ietf-netconf-https-notif</a>]</span> or UDP-based
-   <span>[<a href="#I-D.ietf-netconf-udp-notif" class="cite xref">I-D.ietf-netconf-udp-notif</a>]</span> transport.  Section 3.7 of <span>[<a href="#RFC8641" class="cite xref">RFC8641</a>]</span>
+   <span>[<a href="#I-D.ietf-netconf-udp-notif" class="cite xref">I-D.ietf-netconf-udp-notif</a>]</span> transport.  <span><a href="https://rfc-editor.org/rfc/rfc8641#section-3.7" class="relref">Section 3.7</a> of [<a href="#RFC8641" class="cite xref">RFC8641</a>]</span>
    describes push-update messages where the YANG subscribed data is
-   being published, where Section 2.7 of <span>[<a href="#RFC8639" class="cite xref">RFC8639</a>]</span> describes the
+   being published, where <span><a href="https://rfc-editor.org/rfc/rfc8639#section-2.7" class="relref">Section 2.7</a> of [<a href="#RFC8639" class="cite xref">RFC8639</a>]</span> describes the
    subscription state change notifications where changes in the
    subscription are being described.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
@@ -1499,7 +1499,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-elements-of-the-architectur">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-elements-of-the-architectur" class="section-name selfRef">Elements of the Architecture</a>
       </h2>
-<p id="section-4-1">The architecture consists of 6 elements.  Figure 1 gives an overview
+<p id="section-4-1">The architecture consists of 6 elements.  <a href="#Figure-1" class="auto internal xref">Figure 1</a> gives an overview
    on the workflow.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <span id="name-end-to-end-workflow"></span><div id="Figure-1">
 <figure id="figure-1">
@@ -1562,9 +1562,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-4.1-1">With step number (1) in the workflow diagram, the YANG-Push
    notification capabilities are being discovered according to Section 3
    of <span>[<a href="#RFC9196" class="cite xref">RFC9196</a>]</span>, in with step (2) a YANG-Push subscription is according
-   to Section 2.4 and 2.5 of <span>[<a href="#RFC8639" class="cite xref">RFC8639</a>]</span> dynamically or statically
+   to Sections 2.4 and 2.5 of <span>[<a href="#RFC8639" class="cite xref">RFC8639</a>]</span> dynamically or statically
    configured, and with step (3) subscription state change notifications
-   are sent according to section 2.7 from the YANG-Push publisher to the
+   are sent according to Section 2.7 from the YANG-Push publisher to the
    receiver to inform which event stream filter has been applied to
    which subscription ID.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">When the YANG-Push subscription is managed dynamically, the YANG data
@@ -1576,9 +1576,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
    which needs to be backward compatible to in step (2) and adds the
    module name, revision and revision-label information into the
    subscription state change notifications in step (3).<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">Figure 2 provides and example how to create a YANG-Push configured
-   subscription with NETCONF in XML <span>[<a href="#W3C.REC-xml-20081126" class="cite xref">W3C.REC-xml-20081126</a>]</span> with UDP-
-   based <span>[<a href="#I-D.ietf-netconf-udp-notif" class="cite xref">I-D.ietf-netconf-udp-notif</a>]</span> transport<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-4"><a href="#Figure-2" class="auto internal xref">Figure 2</a> provides and example how to create a YANG-Push configured
+   subscription with NETCONF in XML <span>[<a href="#W3C.REC-xml-20081126" class="cite xref">W3C.REC-xml-20081126</a>]</span> with UDP-based
+   <span>[<a href="#I-D.ietf-netconf-udp-notif" class="cite xref">I-D.ietf-netconf-udp-notif</a>]</span> transport.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 <span id="name-netconf-example-to-establis"></span><div id="Figure-2">
 <figure id="figure-2">
           <div class="alignLeft art-text artwork" id="section-4.1-5.1">
@@ -1645,7 +1645,7 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <a href="#name-netconf-example-to-establis" class="selfRef">NETCONF Example to establish configured subscription</a>
           </figcaption></figure>
 </div>
-<p id="section-4.1-6">Figure 3 provides an example of a JSON encoded, <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>,
+<p id="section-4.1-6"><a href="#Figure-3" class="auto internal xref">Figure 3</a> provides an example of a JSON encoded, <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>,
    subscription-started state change notification message over HTTPS-
    based <span>[<a href="#I-D.ietf-netconf-https-notif" class="cite xref">I-D.ietf-netconf-https-notif</a>]</span> or UDP-based
    <span>[<a href="#I-D.ietf-netconf-udp-notif" class="cite xref">I-D.ietf-netconf-udp-notif</a>]</span> transport with
@@ -1694,7 +1694,7 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <p id="section-4.2-1">With step number (4) in the workflow diagram, a YANG-Push push-update
    or push-change-update message, depending on wherever periodical or
    on-change subscription has been established, is sent from the YANG-
-   Push publisher to the receiver according to Section 3.7 of <span>[<a href="#RFC8639" class="cite xref">RFC8639</a>]</span>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+   Push publisher to the receiver according to <span><a href="https://rfc-editor.org/rfc/rfc8639#section-3.7" class="relref">Section 3.7</a> of [<a href="#RFC8639" class="cite xref">RFC8639</a>]</span>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2"><span>[<a href="#I-D.ahuang-netconf-notif-yang" class="cite xref">I-D.ahuang-netconf-notif-yang</a>]</span> defines the NETCONF notification
    header specified in <span>[<a href="#RFC5277" class="cite xref">RFC5277</a>]</span> in YANG to enable JSON and CBOR
    encoding.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
@@ -1711,7 +1711,7 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
    message. observation-time contains the timestamp and point-in-time
    when the metrics where observed.  See Section 3 of
    <span>[<a href="#I-D.tgraf-netconf-yang-push-observation-time" class="cite xref">I-D.tgraf-netconf-yang-push-observation-time</a>]</span> for more details.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
-<p id="section-4.2-5">Figure 4 provides an example of a JSON encoded, <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>, push-
+<p id="section-4.2-5"><a href="#Figure-4" class="auto internal xref">Figure 4</a> provides an example of a JSON encoded, <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>, push-
    update notification message over HTTPS-based
    <span>[<a href="#I-D.ietf-netconf-https-notif" class="cite xref">I-D.ietf-netconf-https-notif</a>]</span> or UDP-based
    <span>[<a href="#I-D.ietf-netconf-udp-notif" class="cite xref">I-D.ietf-netconf-udp-notif</a>]</span> transport with
@@ -1756,8 +1756,8 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <a href="#name-json-yang-push-example-for-a" class="selfRef">JSON YANG-Push Example for a push-update notification message</a>
           </figcaption></figure>
 </div>
-<p id="section-4.2-7">Figure 5 provides an example of a JSON encoded, <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>, push-
-   change-update notification message over HTTPS-based
+<p id="section-4.2-7"><a href="#Figure-5" class="auto internal xref">Figure 5</a> provides an example of a JSON encoded, <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>,
+   push-change-update notification message over HTTPS-based
    <span>[<a href="#I-D.ietf-netconf-https-notif" class="cite xref">I-D.ietf-netconf-https-notif</a>]</span> or UDP-based
    <span>[<a href="#I-D.ietf-netconf-udp-notif" class="cite xref">I-D.ietf-netconf-udp-notif</a>]</span> transport with
    <span>[<a href="#I-D.tgraf-netconf-notif-sequencing" class="cite xref">I-D.tgraf-netconf-notif-sequencing</a>]</span> and
@@ -1828,10 +1828,10 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <p id="section-4.3-2"><span>[<a href="#I-D.lincla-netconf-yang-library-augmentation" class="cite xref">I-D.lincla-netconf-yang-library-augmentation</a>]</span> extends the YANG
    Library so that not only the submodule but also the augmentation list
    can be obtained.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.3-3">Figure 9 in Section 4.1 and YANG module in Section 5 of <span>[<a href="#RFC8641" class="cite xref">RFC8641</a>]</span>
-   defines the payload of YANG-push notifications where "datastore-
+<p id="section-4.3-3">Figure 9 in Section 4.1 and YANG module in <span><a href="https://rfc-editor.org/rfc/rfc8641#section-5" class="relref">Section 5</a> of [<a href="#RFC8641" class="cite xref">RFC8641</a>]</span>
+   define the payload of YANG-push notifications where "datastore-
    contents" or the "value" of a "push-change-update") is "anydata".
-   <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> Section 7.10 states that anydata represents an unknown set
+   <span><a href="https://rfc-editor.org/rfc/rfc7950#section-7.10" class="relref">Section 7.10</a> of [<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>  states that anydata represents an unknown set
    of nodes that can be modeled with YANG, and the model is not known at
    design time and that the model of the unknown set of nodes can be
    signaled through another protocol.  This poses and issue in the
@@ -1956,7 +1956,11 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
       <h2 id="name-implementation-status">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
-<p id="section-5-1">Note to the RFC-Editor: Please remove this section before publishing.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-5-1.1">
+          <p id="section-5-1.1.1">Note to the RFC-Editor: Please remove this section before publishing.<a href="#section-5-1.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 <p id="section-5-2">This section records the status of known implementations of the
    protocol defined by this specification at the time of posting of this
    Internet-Draft, and is based on a proposal described in <span>[<a href="#RFC7942" class="cite xref">RFC7942</a>]</span>.
@@ -2040,21 +2044,13 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="Con18">[Con18]</dt>
-        <dd>
-<span class="refAuthor">Yokota, R.</span>, <span class="refTitle">"Confluent Schema Registry"</span>, <time datetime="2018-12" class="refDate">December 2018</time>, <span>&lt;<a href="https://github.com/confluentinc/schema-registry/">https://github.com/confluentinc/schema-registry/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="ConDoc18">[ConDoc18]</dt>
-        <dd>
-<span class="refAuthor">Yokota, R.</span>, <span class="refTitle">"Confluent Schema Registry Documentation"</span>, <time datetime="2018-12" class="refDate">December 2018</time>, <span>&lt;<a href="https://docs.confluent.io/platform/current/schema-registry/">https://docs.confluent.io/platform/current/schema-registry/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.aelhassany-anydata-validation">[I-D.aelhassany-anydata-validation]</dt>
         <dd>
 <span class="refAuthor">Elhassany, A.</span>, <span class="refTitle">"Validating anydata in YANG Library context"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-aelhassany-anydata-validation-01</span>, <time datetime="2024-03-17" class="refDate">17 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-aelhassany-anydata-validation-01">https://datatracker.ietf.org/doc/html/draft-aelhassany-anydata-validation-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ahuang-netconf-notif-yang">[I-D.ahuang-netconf-notif-yang]</dt>
         <dd>
-<span class="refAuthor">Feng, A. H.</span>, <span class="refAuthor">Francois, P.</span>, <span class="refAuthor">Graf, T.</span>, and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"YANG model for NETCONF Event Notifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ahuang-netconf-notif-yang-04</span>, <time datetime="2024-01-21" class="refDate">21 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ahuang-netconf-notif-yang-04">https://datatracker.ietf.org/doc/html/draft-ahuang-netconf-notif-yang-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Feng, A. H.</span>, <span class="refAuthor">Francois, P.</span>, <span class="refAuthor">Graf, T.</span>, and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"YANG model for NETCONF Event Notifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ahuang-netconf-notif-yang-05</span>, <time datetime="2024-06-18" class="refDate">18 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ahuang-netconf-notif-yang-05">https://datatracker.ietf.org/doc/html/draft-ahuang-netconf-notif-yang-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-netconf-yang-notifications-versioning">[I-D.ietf-netconf-yang-notifications-versioning]</dt>
         <dd>
@@ -2072,14 +2068,6 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
         <dd>
 <span class="refAuthor">Graf, T.</span>, <span class="refAuthor">Claise, B.</span>, and <span class="refAuthor">A. H. Feng</span>, <span class="refTitle">"Support of Network Observation Timestamping in YANG Notifications"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-tgraf-netconf-yang-push-observation-time-01</span>, <time datetime="2024-04-14" class="refDate">14 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-tgraf-netconf-yang-push-observation-time-01">https://datatracker.ietf.org/doc/html/draft-tgraf-netconf-yang-push-observation-time-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="Kaf11">[Kaf11]</dt>
-        <dd>
-<span class="refAuthor">Narkhede, N.</span>, <span class="refTitle">"Apache Kafka"</span>, <time datetime="2011-01" class="refDate">January 2011</time>, <span>&lt;<a href="https://kafka.apache.org/">https://kafka.apache.org/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="LYP23">[LYP23]</dt>
-        <dd>
-<span class="refAuthor">Lin, Z.</span>, <span class="refTitle">"libyangpush"</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://github.com/network-analytics/libyangpush/">https://github.com/network-analytics/libyangpush/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -2091,10 +2079,6 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <dt id="RFC7950">[RFC7950]</dt>
         <dd>
 <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7951">[RFC7951]</dt>
-        <dd>
-<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7951">https://www.rfc-editor.org/rfc/rfc7951</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
@@ -2113,24 +2097,8 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <span class="refAuthor">Lengyel, B.</span>, <span class="refAuthor">Clemm, A.</span>, and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"YANG Modules Describing Capabilities for Systems and Datastore Update Notifications"</span>, <span class="seriesInfo">RFC 9196</span>, <span class="seriesInfo">DOI 10.17487/RFC9196</span>, <time datetime="2022-02" class="refDate">February 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9196">https://www.rfc-editor.org/rfc/rfc9196</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9254">[RFC9254]</dt>
-        <dd>
-<span class="refAuthor">Veillette, M., Ed.</span>, <span class="refAuthor">Petrov, I., Ed.</span>, <span class="refAuthor">Pelov, A.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">M. Richardson</span>, <span class="refTitle">"Encoding of Data Modeled with YANG in the Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">RFC 9254</span>, <span class="seriesInfo">DOI 10.17487/RFC9254</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9254">https://www.rfc-editor.org/rfc/rfc9254</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="Yak24">[Yak24]</dt>
-        <dd>
-<span class="refAuthor">Feng, F.</span>, <span class="refTitle">"Yangkit"</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://github.com/yang-central/yangkit/">https://github.com/yang-central/yangkit/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="YLA24">[YLA24]</dt>
-        <dd>
-<span class="refAuthor">Lin, Z.</span>, <span class="refTitle">"libyangpush"</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://github.com/Zephyre777/draft-lincla-netconf-yang-library-augmentation/">https://github.com/Zephyre777/draft-lincla-netconf-yang-library-augmentation/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="YSR24">[YSR24]</dt>
-        <dd>
-<span class="refAuthor">Elhassany, A.</span>, <span class="refTitle">"YANG Schema Registry Extension"</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://github.com/confluentinc/schema-registry-yang-format/">https://github.com/confluentinc/schema-registry-yang-format/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="YSRPR24">[YSRPR24]</dt>
       <dd>
-<span class="refAuthor">Elhassany, A.</span>, <span class="refTitle">"YANG Schema Registry Extension Progress Report"</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://github.com/network-analytics/draft-daisy-kafka-yang-integration/blob/main/YANG%20Schema%20registry%20integration.pdf">https://github.com/network-analytics/draft-daisy-kafka-yang-integration/blob/main/YANG%20Schema%20registry%20integration.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">Veillette, M., Ed.</span>, <span class="refAuthor">Petrov, I., Ed.</span>, <span class="refAuthor">Pelov, A.</span>, <span class="refAuthor">Bormann, C.</span>, and <span class="refAuthor">M. Richardson</span>, <span class="refTitle">"Encoding of Data Modeled with YANG in the Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">RFC 9254</span>, <span class="seriesInfo">DOI 10.17487/RFC9254</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9254">https://www.rfc-editor.org/rfc/rfc9254</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2144,6 +2112,14 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <dt id="Atl15">[Atl15]</dt>
         <dd>
 <span class="refAuthor">Hortonworks</span>, <span class="refTitle">"Apache Atlas"</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://atlas.apache.org/">https://atlas.apache.org/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Con18">[Con18]</dt>
+        <dd>
+<span class="refAuthor">Yokota, R.</span>, <span class="refTitle">"Confluent Schema Registry"</span>, <time datetime="2018-12" class="refDate">December 2018</time>, <span>&lt;<a href="https://github.com/confluentinc/schema-registry/">https://github.com/confluentinc/schema-registry/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ConDoc18">[ConDoc18]</dt>
+        <dd>
+<span class="refAuthor">Yokota, R.</span>, <span class="refTitle">"Confluent Schema Registry Documentation"</span>, <time datetime="2018-12" class="refDate">December 2018</time>, <span>&lt;<a href="https://docs.confluent.io/platform/current/schema-registry/">https://docs.confluent.io/platform/current/schema-registry/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Deh22">[Deh22]</dt>
         <dd>
@@ -2160,6 +2136,14 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <dt id="I-D.ietf-netconf-udp-notif">[I-D.ietf-netconf-udp-notif]</dt>
         <dd>
 <span class="refAuthor">Zheng, G.</span>, <span class="refAuthor">Zhou, T.</span>, <span class="refAuthor">Graf, T.</span>, <span class="refAuthor">Francois, P.</span>, <span class="refAuthor">Feng, A. H.</span>, and <span class="refAuthor">P. Lucente</span>, <span class="refTitle">"UDP-based Transport for Configured Subscriptions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netconf-udp-notif-12</span>, <time datetime="2024-01-21" class="refDate">21 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netconf-udp-notif-12">https://datatracker.ietf.org/doc/html/draft-ietf-netconf-udp-notif-12</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Kaf11">[Kaf11]</dt>
+        <dd>
+<span class="refAuthor">Narkhede, N.</span>, <span class="refTitle">"Apache Kafka"</span>, <time datetime="2011-01" class="refDate">January 2011</time>, <span>&lt;<a href="https://kafka.apache.org/">https://kafka.apache.org/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="LYP23">[LYP23]</dt>
+        <dd>
+<span class="refAuthor">Lin, Z.</span>, <span class="refTitle">"libyangpush"</span>, <time datetime="2023-09" class="refDate">September 2023</time>, <span>&lt;<a href="https://github.com/network-analytics/libyangpush/">https://github.com/network-analytics/libyangpush/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Rab07">[Rab07]</dt>
         <dd>
@@ -2185,6 +2169,10 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
         <dd>
 <span class="refAuthor">Sheffer, Y.</span> and <span class="refAuthor">A. Farrel</span>, <span class="refTitle">"Improving Awareness of Running Code: The Implementation Status Section"</span>, <span class="seriesInfo">BCP 205</span>, <span class="seriesInfo">RFC 7942</span>, <span class="seriesInfo">DOI 10.17487/RFC7942</span>, <time datetime="2016-07" class="refDate">July 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7942">https://www.rfc-editor.org/rfc/rfc7942</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7951">[RFC7951]</dt>
+        <dd>
+<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7951">https://www.rfc-editor.org/rfc/rfc7951</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8040">[RFC8040]</dt>
         <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8040">https://www.rfc-editor.org/rfc/rfc8040</a>&gt;</span>. </dd>
@@ -2202,8 +2190,24 @@ yang:ietf-subscribed-notif-receivers"&gt;global-udp-notif-receiver-def&lt;\
 <span class="refAuthor">Song, H.</span>, <span class="refAuthor">Qin, F.</span>, <span class="refAuthor">Martinez-Julia, P.</span>, <span class="refAuthor">Ciavaglia, L.</span>, and <span class="refAuthor">A. Wang</span>, <span class="refTitle">"Network Telemetry Framework"</span>, <span class="seriesInfo">RFC 9232</span>, <span class="seriesInfo">DOI 10.17487/RFC9232</span>, <time datetime="2022-05" class="refDate">May 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9232">https://www.rfc-editor.org/rfc/rfc9232</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="W3C.REC-xml-20081126">[W3C.REC-xml-20081126]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Bray, T.</span>, <span class="refAuthor">Paoli, J.</span>, <span class="refAuthor">Sperberg-McQueen, C. M.</span>, <span class="refAuthor">Maler, E.</span>, and <span class="refAuthor">F. Yergeau</span>, <span class="refTitle">"Extensible Markup Language (XML) 1.0 (Fifth Edition)"</span>, <span class="seriesInfo">W3C World Wide Web Consortium Recommendation REC-xml-20081126</span>, <time datetime="2008-11" class="refDate">November 2008</time>, <span>&lt;<a href="https://www.w3.org/TR/2008/REC-xml-20081126">https://www.w3.org/TR/2008/REC-xml-20081126</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Yak24">[Yak24]</dt>
+        <dd>
+<span class="refAuthor">Feng, F.</span>, <span class="refTitle">"Yangkit"</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://github.com/yang-central/yangkit/">https://github.com/yang-central/yangkit/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="YLA24">[YLA24]</dt>
+        <dd>
+<span class="refAuthor">Lin, Z.</span>, <span class="refTitle">"libyangpush"</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://github.com/Zephyre777/draft-lincla-netconf-yang-library-augmentation/">https://github.com/Zephyre777/draft-lincla-netconf-yang-library-augmentation/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="YSR24">[YSR24]</dt>
+        <dd>
+<span class="refAuthor">Elhassany, A.</span>, <span class="refTitle">"YANG Schema Registry Extension"</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://github.com/confluentinc/schema-registry-yang-format/">https://github.com/confluentinc/schema-registry-yang-format/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="YSRPR24">[YSRPR24]</dt>
+      <dd>
+<span class="refAuthor">Elhassany, A.</span>, <span class="refTitle">"YANG Schema Registry Extension Progress Report"</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://github.com/network-analytics/draft-daisy-kafka-yang-integration/blob/main/YANG%20Schema%20registry%20integration.pdf">https://github.com/network-analytics/draft-daisy-kafka-yang-integration/blob/main/YANG%20Schema%20registry%20integration.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2313,7 +2317,7 @@ point-in-time to describe when the observation was obesreved.<a href="#appendix-
  XSD Schema.  For YANG-push <span>[<a href="#RFC8641" class="cite xref">RFC8641</a>]</span>, this XSD Schema has been
  proposed using YANG 1.1 <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> modeling language in
  <span>[<a href="#I-D.ahuang-netconf-notif-yang" class="cite xref">I-D.ahuang-netconf-notif-yang</a>]</span>.  Examples of notifications
- encoded in XML are provided in Section 5 of <span>[<a href="#RFC5277" class="cite xref">RFC5277</a>]</span>.  In YANG-
+ encoded in XML are provided in <span><a href="https://rfc-editor.org/rfc/rfc5277#section-5" class="relref">Section 5</a> of [<a href="#RFC5277" class="cite xref">RFC5277</a>]</span>.  In YANG-
  JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span>, the specification does not provide any examples on
  how notifications should be encoded.  In YANG-CBOR <span>[<a href="#RFC9254" class="cite xref">RFC9254</a>]</span>,
  notifications are considered "container-like" instances and
