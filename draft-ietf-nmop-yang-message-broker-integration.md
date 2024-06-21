@@ -41,6 +41,8 @@ author:
 
 normative:
 
+informative:
+
    Kaf11:
               target: https://kafka.apache.org/
               title: "Apache Kafka"
@@ -96,8 +98,6 @@ normative:
               author:
                 - name: Ahmed Elhassany
               date: February 2024
-
-informative:
 
    Atl15:
               target: https://atlas.apache.org/
@@ -173,7 +173,7 @@ informative:
 
    With {{?RFC3535}} the IAB set the requirements for Network Management in
    2003.  From these requirements NETCONF {{?RFC6241}}, NETCONF
-   Notifications {{?RFC5277}} and RESTCONF {{?RFC8040}} has been defined to
+   Notifications {{?RFC5277}} and RESTCONF {{?RFC8040}} have been defined to
    configure through `<edit-config>` and retrieve operational data through
    `<get>` and NETCONF notifications through `<notification>` from a YANG
    datastore on a network node.
@@ -185,9 +185,9 @@ informative:
    established NETCONF session, while when it is statically configured
    messages are published through HTTPS-based
    {{?I-D.ietf-netconf-https-notif}} or UDP-based
-   {{?I-D.ietf-netconf-udp-notif}} transport.  Section 3.7 of {{!RFC8641}}
+   {{?I-D.ietf-netconf-udp-notif}} transport.  {{Section 3.7 of !RFC8641}}
    describes push-update messages where the YANG subscribed data is
-   being published, where Section 2.7 of {{!RFC8639}} describes the
+   being published, where {{Section 2.7 of !RFC8639}} describes the
    subscription state change notifications where changes in the
    subscription are being described.
 
@@ -315,7 +315,7 @@ informative:
 
 #  Elements of the Architecture
 
-   The architecture consists of 6 elements.  Figure 1 gives an overview
+   The architecture consists of 6 elements.  {{Figure-1}} gives an overview
    on the workflow.
 
 ~~~~
@@ -371,9 +371,9 @@ informative:
    With step number (1) in the workflow diagram, the YANG-Push
    notification capabilities are being discovered according to Section 3
    of {{!RFC9196}}, in with step (2) a YANG-Push subscription is according
-   to Section 2.4 and 2.5 of {{!RFC8639}} dynamically or statically
+   to Sections 2.4 and 2.5 of {{!RFC8639}} dynamically or statically
    configured, and with step (3) subscription state change notifications
-   are sent according to section 2.7 from the YANG-Push publisher to the
+   are sent according to Section 2.7 from the YANG-Push publisher to the
    receiver to inform which event stream filter has been applied to
    which subscription ID.
 
@@ -382,15 +382,15 @@ informative:
    is being maintained.  With configured subscription the YANG data is
    sent to the YANG-Push receiver through a separate transport session.
 
-   {{!I-D.ietf-netconf-yang-notifications-versioning}} adds the capability
+   {{?I-D.ietf-netconf-yang-notifications-versioning}} adds the capability
    to subscribe to a specific YANG module revision or a YANG module
    which needs to be backward compatible to in step (2) and adds the
    module name, revision and revision-label information into the
    subscription state change notifications in step (3).
 
-   Figure 2 provides and example how to create a YANG-Push configured
-   subscription with NETCONF in XML {{W3C.REC-xml-20081126}} with UDP-
-   based {{?I-D.ietf-netconf-udp-notif}} transport
+   {{Figure-2}} provides and example how to create a YANG-Push configured
+   subscription with NETCONF in XML {{W3C.REC-xml-20081126}} with UDP-based
+   {{?I-D.ietf-netconf-udp-notif}} transport.
 
 
 ~~~~
@@ -398,13 +398,13 @@ informative:
 ~~~~
 {: #Figure-2 title="NETCONF Example to establish configured subscription"}
 
-   Figure 3 provides an example of a JSON encoded, {{!RFC7951}},
+   {{Figure-3}} provides an example of a JSON encoded, {{?RFC7951}},
    subscription-started state change notification message over HTTPS-
    based {{?I-D.ietf-netconf-https-notif}} or UDP-based
    {{?I-D.ietf-netconf-udp-notif}} transport with
-   {{!I-D.tgraf-netconf-notif-sequencing}},
-   {{!I-D.tgraf-netconf-yang-push-observation-time}} and
-   {{!I-D.ietf-netconf-yang-notifications-versioning}} as extensions for
+   {{?I-D.tgraf-netconf-notif-sequencing}},
+   {{?I-D.tgraf-netconf-yang-push-observation-time}} and
+   {{?I-D.ietf-netconf-yang-notifications-versioning}} as extensions for
    the same subscription.
 
 ~~~~
@@ -437,13 +437,13 @@ informative:
    With step number (4) in the workflow diagram, a YANG-Push push-update
    or push-change-update message, depending on wherever periodical or
    on-change subscription has been established, is sent from the YANG-
-   Push publisher to the receiver according to Section 3.7 of {{!RFC8639}}.
+   Push publisher to the receiver according to {{Section 3.7 of !RFC8639}}.
 
-   {{!I-D.ahuang-netconf-notif-yang}} defines the NETCONF notification
+   {{?I-D.ahuang-netconf-notif-yang}} defines the NETCONF notification
    header specified in {{?RFC5277}} in YANG to enable JSON and CBOR
    encoding.
 
-   {{!I-D.tgraf-netconf-notif-sequencing}} adds sysName, messagePublisherId
+   {{?I-D.tgraf-netconf-notif-sequencing}} adds sysName, messagePublisherId
    and sequenceNumber in the NETCONF notification header to each message
    to identify from which network node and publishing process, according
    to {{?I-D.ietf-netconf-distributed-notif}} a network node with
@@ -452,18 +452,18 @@ informative:
    recognize loss from the YANG-Push publisher in step (2) down to the
    Time Series Database Ingestion in step (12).
 
-   {{!I-D.tgraf-netconf-yang-push-observation-time}} adds observation-time
+   {{?I-D.tgraf-netconf-yang-push-observation-time}} adds observation-time
    and point-in-time in the YANG-Push push-update or push-change-update
    message. observation-time contains the timestamp and point-in-time
    when the metrics where observed.  See Section 3 of
-   {{!I-D.tgraf-netconf-yang-push-observation-time}} for more details.
+   {{?I-D.tgraf-netconf-yang-push-observation-time}} for more details.
 
-   Figure 4 provides an example of a JSON encoded, {{!RFC7951}}, push-
+   {{Figure-4}} provides an example of a JSON encoded, {{?RFC7951}}, push-
    update notification message over HTTPS-based
    {{?I-D.ietf-netconf-https-notif}} or UDP-based
    {{?I-D.ietf-netconf-udp-notif}} transport with
-   {{!I-D.tgraf-netconf-notif-sequencing}} and
-   {{!I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
+   {{?I-D.tgraf-netconf-notif-sequencing}} and
+   {{?I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
    same subscription.
 
 ~~~~
@@ -471,12 +471,12 @@ informative:
 ~~~~
 {: #Figure-4 title="JSON YANG-Push Example for a push-update notification message"}
 
-   Figure 5 provides an example of a JSON encoded, {{!RFC7951}}, push-
-   change-update notification message over HTTPS-based
+   {{Figure-5}} provides an example of a JSON encoded, {{?RFC7951}},
+   push-change-update notification message over HTTPS-based
    {{?I-D.ietf-netconf-https-notif}} or UDP-based
    {{?I-D.ietf-netconf-udp-notif}} transport with
-   {{!I-D.tgraf-netconf-notif-sequencing}} and
-   {{!I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
+   {{?I-D.tgraf-netconf-notif-sequencing}} and
+   {{?I-D.tgraf-netconf-yang-push-observation-time}} as extensions for the
    same subscription.
 
 ~~~~
@@ -494,14 +494,14 @@ informative:
    modules need to be retrieved as described in step (4) in the workflow
    diagram.
 
-   {{!I-D.lincla-netconf-yang-library-augmentation}} extends the YANG
+   {{?I-D.lincla-netconf-yang-library-augmentation}} extends the YANG
    Library so that not only the submodule but also the augmentation list
    can be obtained.
 
-   Figure 9 in Section 4.1 and YANG module in Section 5 of {{!RFC8641}}
-   defines the payload of YANG-push notifications where "datastore-
+   Figure 9 in Section 4.1 and YANG module in {{Section 5 of !RFC8641}}
+   define the payload of YANG-push notifications where "datastore-
    contents" or the "value" of a "push-change-update") is "anydata".
-   {{!RFC7950}} Section 7.10 states that anydata represents an unknown set
+   {{Section 7.10 of !RFC7950}}  states that anydata represents an unknown set
    of nodes that can be modeled with YANG, and the model is not known at
    design time and that the model of the unknown set of nodes can be
    signaled through another protocol.  This poses and issue in the
@@ -572,12 +572,12 @@ informative:
    The YANG data is being ingested in step (12)according to the
    previously defined ingestion specification and indexed with the
    timestamp defined in observation-time as defined in
-   {{!I-D.tgraf-netconf-yang-push-observation-time}}.  A network operator
+   {{?I-D.tgraf-netconf-yang-push-observation-time}}.  A network operator
    is now able to query the previously subscribed YANG data.
 
 # Implementation Status
 
-   Note to the RFC-Editor: Please remove this section before publishing.
+   > Note to the RFC-Editor: Please remove this section before publishing.
 
    This section records the status of known implementations of the
    protocol defined by this specification at the time of posting of this
@@ -621,7 +621,7 @@ informative:
 ##  YANG Library Augmented-by Addition
 
    Zhuoyao Lin implemented
-   {{!I-D.lincla-netconf-yang-library-augmentation}} in order to discover
+   {{?I-D.lincla-netconf-yang-library-augmentation}} in order to discover
    augmented-by YANG modules in YANG Library {{?RFC8525}}.
 
    The source code can be obtained here: {{YLA24}} and was validated at
@@ -710,7 +710,7 @@ This document has no IANA actions.
       receiver given that the data nodes contained in anydata subtree is
       potentially incomplete (filtered out by xpath or subtree).  How
       can a YANG-Push receiver validate the content of anydata nodes?
-      {{!I-D.aelhassany-anydata-validation}} addresses this by using YANG
+      {{?I-D.aelhassany-anydata-validation}} addresses this by using YANG
       Library {{?RFC8525}} as mechanism to exchange the YANG model of the
       nodes contained in anydata.
 
@@ -719,21 +719,21 @@ This document has no IANA actions.
       XSD Schema.  For YANG-push {{!RFC8641}}, this XSD Schema has been
       proposed using YANG 1.1 {{!RFC7950}} modeling language in
       {{!I-D.ahuang-netconf-notif-yang}}.  Examples of notifications
-      encoded in XML are provided in Section 5 of {{?RFC5277}}.  In YANG-
-      JSON {{!RFC7951}}, the specification does not provide any examples on
+      encoded in XML are provided in {{Section 5 of ?RFC5277}}.  In YANG-
+      JSON {{?RFC7951}}, the specification does not provide any examples on
       how notifications should be encoded.  In YANG-CBOR {{!RFC9254}},
       notifications are considered "container-like" instances and
       examples does not show consistency with XML-based and YANG-JSON
       encoding notifications.  Assumptions are being made in
-      {{!I-D.ahuang-netconf-notif-yang}} providing examples of YANG-JSON
+      {{?I-D.ahuang-netconf-notif-yang}} providing examples of YANG-JSON
       and YANG-CBOR encoded notifications.  The notification structure
       needs consistency accross YANG encodings.  Confirm findings and
       propose how to be addressed.
 
    Open Point 3:
    : Test with running code wherever with
-      {{!I-D.ietf-netconf-yang-notifications-versioning}} and
-      {{!I-D.lincla-netconf-yang-library-augmentation}} all datastore-
+      {{?I-D.ietf-netconf-yang-notifications-versioning}} and
+      {{?I-D.lincla-netconf-yang-library-augmentation}} all datastore-
       subtree-filter or datastore-xpath-filter referenced YANG modules
       and their dependencies can be fully indentified.
 
