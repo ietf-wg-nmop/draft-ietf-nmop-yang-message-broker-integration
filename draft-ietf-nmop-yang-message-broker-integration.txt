@@ -5,7 +5,7 @@
 Network Management Operations                                    T. Graf
 Internet-Draft                                              A. Elhassany
 Intended status: Informational                                  Swisscom
-Expires: 23 December 2024                                   21 June 2024
+Expires: 8 August 2025                                   4 February 2025
 
 
       An Architecture for YANG-Push to Message Broker Integration
@@ -51,11 +51,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 December 2024.
+   This Internet-Draft will expire on 8 August 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -736,9 +736,9 @@ Table of Contents
               Graf, T., Claise, B., and A. H. Feng, "Support of
               Versioning in YANG Notifications Subscription", Work in
               Progress, Internet-Draft, draft-ietf-netconf-yang-
-              notifications-versioning-05, 16 June 2024,
+              notifications-versioning-07, 17 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              yang-notifications-versioning-05>.
+              yang-notifications-versioning-07>.
 
    [I-D.lincla-netconf-yang-library-augmentation]
               Lin, Z., Claise, B., and I. D. Martinez-Casanueva,
@@ -752,17 +752,17 @@ Table of Contents
               Graf, T., Quilbeuf, J., and A. H. Feng, "Support of
               Hostname and Sequencing in YANG Notifications", Work in
               Progress, Internet-Draft, draft-tgraf-netconf-notif-
-              sequencing-04, 28 April 2024,
+              sequencing-06, 29 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-tgraf-
-              netconf-notif-sequencing-04>.
+              netconf-notif-sequencing-06>.
 
    [I-D.tgraf-netconf-yang-push-observation-time]
-              Graf, T., Claise, B., and A. H. Feng, "Support of Network
-              Observation Timestamping in YANG Notifications", Work in
+              Graf, T., Claise, B., and A. H. Feng, "Support of
+              Observation Timestamp in YANG-Push Notifications", Work in
               Progress, Internet-Draft, draft-tgraf-netconf-yang-push-
-              observation-time-01, 14 April 2024,
+              observation-time-03, 14 December 2024,
               <https://datatracker.ietf.org/doc/html/draft-tgraf-
-              netconf-yang-push-observation-time-01>.
+              netconf-yang-push-observation-time-03>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -822,9 +822,9 @@ Table of Contents
               Zhou, T., Zheng, G., Voit, E., Graf, T., and P. Francois,
               "Subscription to Distributed Notifications", Work in
               Progress, Internet-Draft, draft-ietf-netconf-distributed-
-              notif-09, 28 April 2024,
+              notif-10, 18 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              distributed-notif-09>.
+              distributed-notif-10>.
 
    [I-D.ietf-netconf-https-notif]
               Jethanandani, M. and K. Watsen, "An HTTPS-based Transport
@@ -837,9 +837,9 @@ Table of Contents
               Zheng, G., Zhou, T., Graf, T., Francois, P., Feng, A. H.,
               and P. Lucente, "UDP-based Transport for Configured
               Subscriptions", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-udp-notif-12, 21 January 2024,
+              ietf-netconf-udp-notif-18, 13 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              udp-notif-12>.
+              udp-notif-18>.
 
    [Kaf11]    Narkhede, N., "Apache Kafka", January 2011,
               <https://kafka.apache.org/>.
