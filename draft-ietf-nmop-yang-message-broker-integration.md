@@ -143,19 +143,19 @@ informative:
 
 # Introduction
 
-   Nowadays network operators are using YANG {{!RFC7950}} to model their
-   configurations and obtain YANG modelled data from their networks.  It
+   Nowadays, network operators are using YANG {{!RFC7950}} to model their
+   configurations and obtain YANG modeled data from their networks.  It
    is well understood that plain text are initially intended for humans
    and need effort to make it machine readable due to the lack of
    semantics.  YANG modeled data is addressing most of these needs.
 
-   Increasingly more network operators organizing their data in a Data
+   Increasingly, more network operators are organizing their data in a Data
    Mesh {{Deh22}} where a Message Broker such as Apache Kafka {{Kaf11}} or
    RabbitMQ {{Rab07}} facilitates the exchange of messages among data
    processing components like a stream processor to filter, enrich,
    correlate or aggregate, or a time series database to store data.
 
-   Even though YANG is intend to ease the handling of data, this promise
+   Even though YANG is intended to ease the handling of data, its promise
    has not yet been fulfilled for Network Telemetry {{?RFC9232}}.  From
    subscribing on a YANG datastore, publishing a YANG modeled
    notifications message from the network and viewing the data in a time
@@ -165,13 +165,13 @@ informative:
    its data processing components with YANG notifications interoparable.
    Since YANG modules can change over time, for example when a router is
    being upgraded to a newer software release, this process needs to be
-   adjusted contionously, leading often to errors in the data chain if
+   adjusted continuously, leading often to errors in the data chain if
    dependencies are not properly tracked and schema changes adjusted
    simultaneously.
 
 ##  Origins of YANG-Push
 
-   With {{?RFC3535}} the IAB set the requirements for Network Management in
+   With {{?RFC3535}}, the IAB set the requirements for Network Management in
    2003.  From these requirements NETCONF {{?RFC6241}}, NETCONF
    Notifications {{?RFC5277}} and RESTCONF {{?RFC8040}} have been defined to
    configure through `<edit-config>` and retrieve operational data through
@@ -194,12 +194,12 @@ informative:
 ## Origins of Apache Kafka
 
    Apache Kafka {{Kaf11}} is a Message Broker that supports producing and
-   consuming messages from so called topics.  Each topic has one or more
+   consuming messages from so-called topics.  Each topic has one or more
    partitions where messages are replicated or load balanced to scale
    out.  With the introduction of Confluent Schema Registry {{Con18}} a
    topic can contain one or more subjects.  A subject refers to a Schema
    defining the structure of the message.  The Schema then is used to
-   validate messages sent through topics and are identified by a Schema
+   validate messages sent through topics. Schema are identified by a Schema
    ID.  The Schema ID is issued when the Schema is registered to the
    Confluent Schema Registry.  Once the Schema ID is obtained, it can be
    prefixed to the message with a Confluent Schema Registry compatible
@@ -213,9 +213,9 @@ informative:
 
    This document focuses on YANG-Push {{!RFC8641}} as the messaging
    protocol between the network node and the Network Telemetry {{?RFC9232}}
-   data collection.  It describes the main components and the aimed
+   data collection.  It describes the main components and the idealized
    architecture for deploying such solution in a production network.
-   Then, it illustrates the integration of the YANG 1.1 {{!RFC7950}} as a
+   Then, it illustrates the integration of YANG 1.1 {{!RFC7950}} as a
    schema modeling language into the Apache Kafka Message Broker and
    Confluent Schema Registry {{Con18}}.
 
